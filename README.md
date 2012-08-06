@@ -1,0 +1,4 @@
+autobind
+========
+
+Guice Automatic Binding
