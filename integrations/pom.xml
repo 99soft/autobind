@@ -15,28 +15,31 @@
   limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.nnsoft.guice.autobind</groupId>
-		<artifactId>autobind-parent</artifactId>
-		<version>0.9.2-SNAPSHOT</version>
-	</parent>
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.nnsoft.guice.autobind.integrations</groupId>
-	<artifactId>integrations-parent</artifactId>
-	<name>org.nnsoft.guice.autobind.integrations</name>
-	<packaging>pom</packaging>
+  <parent>
+    <groupId>org.nnsoft.guice.autobind</groupId>
+    <artifactId>autobind-parent</artifactId>
+    <version>0.9.2-SNAPSHOT</version>
+  </parent>
 
-	<modules>
-		<module>commons.configurations</module>
-		<module>enterprise</module>
-		<module>metro</module>
-	</modules>
-	<dependencies>
-		<dependency>
-			<groupId>org.nnsoft.guice.autobind</groupId>
-			<artifactId>autobind-core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+  <groupId>org.nnsoft.guice.autobind.integrations</groupId>
+  <artifactId>integrations-parent</artifactId>
+  <name>org.nnsoft.guice.autobind.integrations</name>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>commons.configurations</module>
+    <module>enterprise</module>
+    <module>metro</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.nnsoft.guice.autobind</groupId>
+      <artifactId>autobind-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
 </project>

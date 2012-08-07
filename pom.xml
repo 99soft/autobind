@@ -15,84 +15,88 @@
   limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.99soft</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>9</version>
-	</parent>
-	
-	<groupId>org.nnsoft.guice.autobind</groupId>
-	<artifactId>autobind-parent</artifactId>
-	<name>org.nnsoft.guice.autobind</name>
-	<version>0.9.2-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	
-	<properties>
-		<project.version>0.9.2-SNAPSHOT</project.version>
-		<javac.src.version>1.6</javac.src.version>
-		<javac.target.version>1.6</javac.target.version>
-	</properties>
-	
-	<developers>
-		<developer>
-			<id>manzke</id>
-			<name>Daniel Manzke</name>
-			<email>daniel [dot] manzke [at] gmail [dot] com</email>
-			<url>http://devsurf.azurewebsites.net/</url>
-			<timezone>+1</timezone>
-		</developer>
+  <modelVersion>4.0.0</modelVersion>
 
-		<developer>
-			<id>simonetripodi</id>
-			<name>Simone Tripodi</name>
-			<email>simone [dot] tripodi [at] gmail [dot] com</email>
-			<url>http://simonetripodi.livejournal.com/</url>
-			<timezone>+1</timezone>
-		</developer>
-	</developers>
+  <parent>
+    <groupId>org.99soft</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>9</version>
+  </parent>
 
-	<modules>
-		<module>annotations</module>
-		<module>core</module>
-		<module>examples</module>
-		<module>integrations</module>
-		<module>scanner</module>
-		<module>aop</module>
-		<module>tests</module>
-	</modules>
-	
-	<scm>
-		<url>http://github.com/99soft/autobind</url>
-		<connection>scm:git:ssh://github.com/99soft/autobind.git</connection>
-		<developerConnection>scm:git:git+ssh://git@github.com/99soft/autobind.git</developerConnection>
-	</scm>
-	<issueManagement>
-		<system>GitHub Issue Management</system>
-		<url>https://github.com/99soft/autobind/issues</url>
-	</issueManagement>
-	<distributionManagement>
-		<site>
-			<id>github</id>
-			<url>gitsite:git@github.com/99soft/autobind.git</url>
-		</site>
-	</distributionManagement>
+  <groupId>org.nnsoft.guice.autobind</groupId>
+  <artifactId>autobind-parent</artifactId>
+  <name>org.nnsoft.guice.autobind</name>
+  <version>0.9.2-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-	<dependencies>
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-multibindings</artifactId>
-			<version>3.0</version>
-		</dependency>
-	</dependencies>
+  <properties>
+    <project.version>0.9.2-SNAPSHOT</project.version>
+    <javac.src.version>1.6</javac.src.version>
+    <javac.target.version>1.6</javac.target.version>
+  </properties>
+
+  <developers>
+    <developer>
+      <id>manzke</id>
+      <name>Daniel Manzke</name>
+      <email>daniel [dot] manzke [at] gmail [dot] com</email>
+      <url>http://devsurf.azurewebsites.net/</url>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>simonetripodi</id>
+      <name>Simone Tripodi</name>
+      <email>simone [dot] tripodi [at] gmail [dot] com</email>
+      <url>http://simonetripodi.livejournal.com/</url>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
+  <modules>
+    <module>annotations</module>
+    <module>core</module>
+    <module>examples</module>
+    <module>integrations</module>
+    <module>scanner</module>
+    <module>aop</module>
+    <module>tests</module>
+  </modules>
+
+  <scm>
+    <url>http://github.com/99soft/autobind</url>
+    <connection>scm:git:ssh://github.com/99soft/autobind.git</connection>
+    <developerConnection>scm:git:git+ssh://git@github.com/99soft/autobind.git</developerConnection>
+  </scm>
+  <issueManagement>
+    <system>GitHub Issue Management</system>
+    <url>https://github.com/99soft/autobind/issues</url>
+  </issueManagement>
+  <distributionManagement>
+    <site>
+      <id>github</id>
+      <url>gitsite:git@github.com/99soft/autobind.git</url>
+    </site>
+  </distributionManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>3.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-multibindings</artifactId>
+      <version>3.0</version>
+    </dependency>
+  </dependencies>
+
 </project>
