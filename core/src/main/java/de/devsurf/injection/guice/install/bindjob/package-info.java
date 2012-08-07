@@ -1,3 +1,6 @@
+/**
+ * TODO fillme.
+ */
 package de.devsurf.injection.guice.install.bindjob;
 
 /*
@@ -15,22 +18,3 @@ package de.devsurf.injection.guice.install.bindjob;
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-
-import java.lang.annotation.Annotation;
-
-public class ImplementationBindingJob
-    extends BindingJob
-{
-
-    public ImplementationBindingJob( Class<? extends Annotation> scoped, Annotation annotated, String className )
-    {
-        super( scoped, null, annotated, className, null );
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Implementation" + super.toString();
-    }
-
-}

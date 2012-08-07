@@ -22,47 +22,65 @@ import javax.inject.Named;
 import de.devsurf.injection.guice.annotations.To.Type;
 import de.devsurf.injection.guice.jsr330.Names;
 
-public class Annotations {
-	public static Bind createBind(final Type type){
-		return new Bind() {
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return Bind.class;
-			}
-			
-			@Override
-			public Named value() {
-				return Names.named("");
-			}
-			
-			@Override
-			public To to() {
-				return createTo(type);
-			}
-			
-			@Override
-			public boolean multiple() {
-				return false;
-			}
-		};
-	}
-	
-	public static To createTo(final Type type){
-		return new To() {
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return To.class;
-			}
-			
-			@Override
-			public Type value() {
-				return type;
-			}
-			
-			@Override
-			public Class<? extends Object>[] customs() {
-				return new Class<?>[0];
-			}
-		};
-	}
+public class Annotations
+{
+
+    public static Bind createBind( final Type type )
+    {
+        return new Bind()
+        {
+
+            @Override
+            public Class<? extends Annotation> annotationType()
+            {
+                return Bind.class;
+            }
+
+            @Override
+            public Named value()
+            {
+                return Names.named( "" );
+            }
+
+            @Override
+            public To to()
+            {
+                return createTo( type );
+            }
+
+            @Override
+            public boolean multiple()
+            {
+                return false;
+            }
+
+        };
+    }
+
+    public static To createTo( final Type type )
+    {
+        return new To()
+        {
+
+            @Override
+            public Class<? extends Annotation> annotationType()
+            {
+                return To.class;
+            }
+
+            @Override
+            public Type value()
+            {
+                return type;
+            }
+
+            @Override
+            public Class<? extends Object>[] customs()
+            {
+                return new Class<?>[0];
+            }
+
+        };
+    }
+
 }
