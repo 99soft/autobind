@@ -18,7 +18,7 @@ package de.devsurf.injection.guice.jsr330;
 
 import javax.inject.Named;
 
-public class Names
+public final class Names
 {
 
     /**
