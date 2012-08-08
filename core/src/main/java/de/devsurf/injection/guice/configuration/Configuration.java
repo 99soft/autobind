@@ -21,6 +21,7 @@ import static de.devsurf.injection.guice.configuration.Configuration.Type.CONFIG
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import java.util.Properties;
@@ -33,6 +34,7 @@ import javax.inject.Named;
  *
  * @author Daniel Manzke
  */
+@Documented
 @Retention( RUNTIME )
 @Target( TYPE )
 public @interface Configuration

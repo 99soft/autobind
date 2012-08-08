@@ -18,6 +18,9 @@ package de.devsurf.injection.guice.configuration;
 
 import static de.devsurf.injection.guice.configuration.PathConfig.PathType.CLASSPATH;
 
+import java.lang.annotation.Documented;
+
+@Documented
 public @interface PathConfig
 {
 
