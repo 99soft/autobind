@@ -40,21 +40,15 @@
     </dependency>
 
     <dependency>
-      <groupId>de.devsurf.injection.guice.integrations</groupId>
-      <artifactId>de.devsurf.injection.guice.integrations.guicyfruit</artifactId>
-      <version>0.9.1-SNAPSHOT</version>
+      <groupId>org.nnsoft.guice.autobind</groupId>
+      <artifactId>autobind-aop</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>de.devsurf.injection.guice</groupId>
-      <artifactId>de.devsurf.injection.guice.aop</artifactId>
-      <version>0.9.1-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>de.devsurf.injection.guice.integrations</groupId>
-      <artifactId>de.devsurf.injection.guice.integrations.commons.configurations</artifactId>
-      <version>0.9.1-SNAPSHOT</version>
+      <groupId>org.nnsoft.guice.autobind.integrations</groupId>
+      <artifactId>integrations-configurations</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
@@ -64,14 +58,13 @@
     </dependency>
 
     <dependency>
-      <groupId>de.devsurf.injection.guice.integrations</groupId>
-      <artifactId>de.devsurf.injection.guice.integrations.enterprise</artifactId>
-      <version>0.9.1-SNAPSHOT</version>
-      <scope>compile</scope>
+      <groupId>org.nnsoft.guice.autobind.integrations</groupId>
+      <artifactId>integrations-enterprise</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 
-  <build>
+  <!-- build>
     <resources>
       <resource>
         <directory>${basedir}/../</directory>
@@ -82,6 +75,6 @@
         </includes>
       </resource>
     </resources>
-  </build>
+  </build -->
 
 </project>

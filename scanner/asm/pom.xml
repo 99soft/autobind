@@ -34,7 +34,7 @@
     </dependency>
   </dependencies>
 
-  <build>
+  <!-- build>
     <resources>
       <resource>
         <directory>${basedir}/../../</directory>
@@ -45,6 +45,6 @@
         </includes>
       </resource>
     </resources>
-  </build>
+  </build -->
 
 </project>

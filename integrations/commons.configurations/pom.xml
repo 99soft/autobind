@@ -32,6 +32,12 @@
       <artifactId>autobind-core</artifactId>
       <version>${project.version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.nnsoft.guice.autobind</groupId>
+      <artifactId>autobind-configuration</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>commons-configuration</groupId>
@@ -49,7 +55,7 @@
     </dependency>
   </dependencies>
 
-  <build>
+  <!-- build>
     <resources>
       <resource>
         <directory>${basedir}/../../</directory>
@@ -60,6 +66,6 @@
         </includes>
       </resource>
     </resources>
-  </build>
+  </build -->
 
 </project>
