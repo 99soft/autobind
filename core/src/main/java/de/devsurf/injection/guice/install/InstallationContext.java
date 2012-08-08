@@ -30,7 +30,7 @@ import java.util.concurrent.Callable;
  */
 public class InstallationContext {
 
-    private Map<BindingStage, List<Callable<?>>> context = new HashMap<BindingStage, List<Callable<?>>>();
+    private final Map<BindingStage, List<Callable<?>>> context = new HashMap<BindingStage, List<Callable<?>>>();
 
     public void process()
         throws Exception
