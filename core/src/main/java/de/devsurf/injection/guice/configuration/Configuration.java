@@ -77,7 +77,7 @@ public @interface Configuration
      */
     Type type() default CONFIGURATION;
 
-    public enum Type
+    public static enum Type
     {
 
         /**

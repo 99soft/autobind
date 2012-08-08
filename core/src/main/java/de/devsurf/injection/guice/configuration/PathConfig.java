@@ -25,7 +25,7 @@ public @interface PathConfig
 
     PathType type() default CLASSPATH;
 
-    public enum PathType
+    public static enum PathType
     {
 
         /**
