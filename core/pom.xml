@@ -28,11 +28,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.nnsoft.guice.autobind</groupId>
-      <artifactId>autobind-annotations</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.ow2.asm</groupId>
       <artifactId>asm</artifactId>
       <version>4.0</version>
@@ -44,14 +39,9 @@
       <artifactId>guava</artifactId>
       <version>13.0</version>
     </dependency>
-    <!--dependency>
-      <groupId>com.googlecode.rocoto</groupId>
-      <artifactId>rocoto</artifactId>
-      <version>4.0</version>
-    </dependency-->
   </dependencies>
 
-  <build>
+  <!-- build>
     <resources>
       <resource>
         <directory>${basedir}/../</directory>
@@ -62,6 +52,6 @@
         </includes>
       </resource>
     </resources>
-  </build>
+  </build -->
 
 </project>
