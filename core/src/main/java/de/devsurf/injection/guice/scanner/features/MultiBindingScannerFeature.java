@@ -16,6 +16,8 @@ package de.devsurf.injection.guice.scanner.features;
  *    limitations under the License.
  */
 
+import static com.google.inject.multibindings.Multibinder.newSetBinder;
+
 import java.lang.annotation.Annotation;
 
 import com.google.inject.binder.ScopedBindingBuilder;
@@ -40,11 +42,11 @@ public abstract class MultiBindingScannerFeature
         {
             if ( annotation != null )
             {
-                builder = Multibinder.newSetBinder( _binder, interf, annotation );
+                builder = newSetBinder( _binder, interf, annotation );
             }
             else
             {
-                builder = Multibinder.newSetBinder( _binder, interf );
+                builder = newSetBinder( _binder, interf );
             }
 
             builder.addBinding().toInstance( impl );
@@ -56,7 +58,7 @@ public abstract class MultiBindingScannerFeature
         Multibinder<String> builder;
         synchronized ( _binder )
         {
-            builder = Multibinder.newSetBinder( _binder, String.class, annotation );
+            builder = newSetBinder( _binder, String.class, annotation );
             builder.addBinding().toInstance( value );
         }
     }
@@ -69,11 +71,11 @@ public abstract class MultiBindingScannerFeature
         {
             if ( annotation != null )
             {
-                builder = Multibinder.newSetBinder( _binder, interf, annotation );
+                builder = newSetBinder( _binder, interf, annotation );
             }
             else
             {
-                builder = Multibinder.newSetBinder( _binder, interf );
+                builder = newSetBinder( _binder, interf );
             }
 
             ScopedBindingBuilder scopedBindingBuilder = builder.addBinding().to( impl );
