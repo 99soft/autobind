@@ -23,7 +23,7 @@ import javax.inject.Named;
 import de.devsurf.injection.guice.annotations.To.Type;
 import de.devsurf.injection.guice.jsr330.Names;
 
-public class Annotations
+public final class Annotations
 {
 
     public static Bind createBind( final Type type )
