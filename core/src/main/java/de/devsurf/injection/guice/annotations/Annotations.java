@@ -16,12 +16,13 @@ package de.devsurf.injection.guice.annotations;
  *    limitations under the License.
  */
 
+import static de.devsurf.injection.guice.jsr330.Names.named;
+
 import java.lang.annotation.Annotation;
 
 import javax.inject.Named;
 
 import de.devsurf.injection.guice.annotations.To.Type;
-import de.devsurf.injection.guice.jsr330.Names;
 
 public final class Annotations
 {
@@ -48,7 +49,7 @@ public final class Annotations
             @Override
             public Named value()
             {
-                return Names.named( "" );
+                return named( "" );
             }
 
             @Override
