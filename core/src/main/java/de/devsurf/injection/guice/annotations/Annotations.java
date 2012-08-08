@@ -26,6 +26,14 @@ import de.devsurf.injection.guice.jsr330.Names;
 public final class Annotations
 {
 
+    /**
+     * Hidden constructor, this class cannot be instantiated.
+     */
+    private Annotations()
+    {
+        // do nothing
+    }
+
     public static Bind createBind( final Type type )
     {
         return new Bind()
