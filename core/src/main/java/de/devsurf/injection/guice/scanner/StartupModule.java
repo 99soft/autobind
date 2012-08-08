@@ -1,19 +1,20 @@
-/**
- * Copyright (C) 2010 Daniel Manzke <daniel.manzke@googlemail.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package de.devsurf.injection.guice.scanner;
+
+/*
+ *    Copyright 2012 The 99 Software Foundation
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -57,9 +58,7 @@ import de.devsurf.injection.guice.scanner.features.ScannerFeature;
  * Implementations, you have to pass the Class for the Scanner and the Packages
  * which should be scanned. You can override the bindAnnotationListeners-Method,
  * to add your own {@link ScannerFeature}.
- * 
- * @author Daniel Manzke
- * 
+ *
  */
 public abstract class StartupModule extends AbstractModule {
 	protected Logger _logger = Logger.getLogger(StartupModule.class.getName());
@@ -81,7 +80,7 @@ public abstract class StartupModule extends AbstractModule {
 		List<PackageFilter> packages = new ArrayList<PackageFilter>();
 		Collections.addAll(packages, _packages);
 		Collections.addAll(packages, bindPackages());
-		
+
 		_packages = packages.toArray(new PackageFilter[packages.size()]);
 		Module scannerModule = new AbstractModule() {
 			@Override
@@ -113,7 +112,7 @@ public abstract class StartupModule extends AbstractModule {
 		if (bindEnvironment) {
 			configurationModule.addConfigurationReader(new EnvironmentVariablesReader());
 		}
-		
+
 		if(bindStartupConfiguration){
 			URL startup = getClass().getResource("/conf/startup.xml");
 			if(startup != null){
@@ -123,24 +122,24 @@ public abstract class StartupModule extends AbstractModule {
 					configurationModule.addConfigurationReader(new PropertiesURLReader(new File(startupURI), true));
 				} catch (URISyntaxException e) {
 					_logger.log(Level.INFO, "Startup Config couldn't be found in Classpath.", e);
-				}	
+				}
 			}else{
 				_logger.log(Level.INFO, "Startup Config couldn't be found, so it is not used.");
-			}			
+			}
 		}
-		
+
 		Injector internal = Guice.createInjector(scannerModule, configurationModule);
 		binder().install(internal.getInstance(ScannerModule.class));
 		binder().install(configurationModule);
-		
+
 		if(verbose){
 			BindingTracer tracer = internal.getInstance(BindingTracer.class);
-			
+
 			StringBuilder builder = new StringBuilder();
 			builder.append("Following Binding were processed.\n");
 			for(BindingJob job : tracer){
 				builder.append(job.toString()).append("\n");
-			}			
+			}
 			_logger.info(builder.toString());
 		}
 	}
@@ -167,20 +166,20 @@ public abstract class StartupModule extends AbstractModule {
 		if(classpath != null && classpath.length() > 0){
 			try {
 				URL resource = StartupModule.class.getResource("/");
-				
+
 				if ( resource == null ){
 					String className = StartupModule.class.getName().replace('.', '/') + ".class";
 					resource = StartupModule.class.getResource( className );
-					
+
 					if ( resource != null ){
 						String url = resource.toExternalForm();
 						url = url.substring( 0, url.length() - className.length() );
 						resource = new URL( url );
 					}
 				}
-				
+
 				if(resource != null){
-					classpath = classpath + File.pathSeparator + new File(resource.toURI()).getAbsolutePath();	
+					classpath = classpath + File.pathSeparator + new File(resource.toURI()).getAbsolutePath();
 				}
 			} catch (URISyntaxException e) {
 				//FIXME ignore for now
@@ -197,7 +196,7 @@ public abstract class StartupModule extends AbstractModule {
 				} catch (MalformedURLException e) {
 					_logger.log(Level.INFO, "Found invalid URL in Classpath: " + path, e);
 				}
-			}			
+			}
 		}
 
 		return urlSet;
@@ -212,7 +211,7 @@ public abstract class StartupModule extends AbstractModule {
 		bindSystemProperties = true;
 		return this;
 	}
-	
+
 	public StartupModule disableStartupConfiguration() {
 		bindStartupConfiguration = false;
 		return this;
@@ -222,7 +221,7 @@ public abstract class StartupModule extends AbstractModule {
 		bindEnvironment = true;
 		return this;
 	}
-	
+
 	public void verbose(){
 		verbose = true;
 	}
