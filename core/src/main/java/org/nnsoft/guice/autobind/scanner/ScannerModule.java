@@ -32,7 +32,6 @@ import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 
-
 /**
  * The ScannerModule will be injected with a ClasspathScanner and the needed
  * Annotation Listeners will be added. The attached Listeners will install all
