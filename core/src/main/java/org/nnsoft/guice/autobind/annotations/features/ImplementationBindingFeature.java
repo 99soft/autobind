@@ -31,14 +31,13 @@ import org.nnsoft.guice.autobind.install.BindingStage;
 public class ImplementationBindingFeature
     extends AutoBindingFeature
 {
-
     @Override
     public BindingStage accept( Class<Object> annotatedClass, Map<String, Annotation> annotations )
     {
         if ( annotations.containsKey( Bind.class.getName() ) )
         {
             Bind annotation = (Bind) annotations.get( Bind.class.getName() );
-            if ( !annotation.multiple() && ( annotation.to().value() == IMPLEMENTATION ) )
+            if ( !annotation.multiple() && ( IMPLEMENTATION == annotation.to().value() ) )
             {
                 return BindingStage.BINDING;
             }
