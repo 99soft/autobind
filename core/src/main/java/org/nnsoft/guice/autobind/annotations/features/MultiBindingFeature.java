@@ -16,6 +16,7 @@ package org.nnsoft.guice.autobind.annotations.features;
  *    limitations under the License.
  */
 
+import static com.google.inject.multibindings.Multibinder.newSetBinder;
 import static org.nnsoft.guice.autobind.install.BindingStage.BINDING;
 import static org.nnsoft.guice.autobind.install.BindingStage.IGNORE;
 
@@ -65,11 +66,11 @@ public class MultiBindingFeature
             {
                 if ( annotation != null )
                 {
-                    builder = Multibinder.newSetBinder( _binder, interf, annotation );
+                    builder = newSetBinder( _binder, interf, annotation );
                 }
                 else
                 {
-                    builder = Multibinder.newSetBinder( _binder, interf );
+                    builder = newSetBinder( _binder, interf );
                 }
 
                 ScopedBindingBuilder scopedBindingBuilder = builder.addBinding().to( implementationClass );
