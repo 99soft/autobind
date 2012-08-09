@@ -16,6 +16,10 @@ package org.nnsoft.guice.autobind.scanner;
  *    limitations under the License.
  */
 
+import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Logger.getLogger;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -26,7 +30,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.nnsoft.guice.autobind.annotations.features.AutoBindingFeature;
@@ -58,7 +61,7 @@ public abstract class StartupModule
     extends AbstractModule
 {
 
-    protected final Logger _logger = Logger.getLogger( StartupModule.class.getName() );
+    protected final Logger _logger = getLogger( getClass().getName() );
 
     protected PackageFilter[] _packages;
 
@@ -94,7 +97,7 @@ public abstract class StartupModule
             protected void configure()
             {
                 Binder binder = binder();
-                if ( _logger.isLoggable( Level.FINE ) )
+                if ( _logger.isLoggable( FINE ) )
                 {
                     _logger.fine( "Binding ClasspathScanner to " + _scanner.getName() );
                     for ( PackageFilter p : _packages )
@@ -126,13 +129,13 @@ public abstract class StartupModule
         // if(startup != null){
         // try {
         // URI startupURI = startup.toURI();
-        // _logger.log(Level.INFO, "Startup Config is used from Path: "+startupURI);
+        // _logger.log(INFO, "Startup Config is used from Path: "+startupURI);
         // configurationModule.addConfigurationReader(new PropertiesURLReader(new File(startupURI), true));
         // } catch (URISyntaxException e) {
-        // _logger.log(Level.INFO, "Startup Config couldn't be found in Classpath.", e);
+        // _logger.log(INFO, "Startup Config couldn't be found in Classpath.", e);
         // }
         // }else{
-        // _logger.log(Level.INFO, "Startup Config couldn't be found, so it is not used.");
+        // _logger.log(INFO, "Startup Config couldn't be found, so it is not used.");
         // }
         // }
 
@@ -223,7 +226,7 @@ public abstract class StartupModule
                 }
                 catch ( MalformedURLException e )
                 {
-                    _logger.log( Level.INFO, "Found invalid URL in Classpath: " + path, e );
+                    _logger.log( INFO, "Found invalid URL in Classpath: " + path, e );
                 }
             }
         }
