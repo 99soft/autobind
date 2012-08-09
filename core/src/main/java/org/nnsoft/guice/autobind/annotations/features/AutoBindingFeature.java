@@ -83,6 +83,7 @@ public class AutoBindingFeature
             case CUSTOM:
                 interfaces = (Class<Object>[]) annotation.to().customs();
                 break;
+
             case SUPER:
                 Class<? super Object> superclass = annotatedClass.getSuperclass();
                 if ( Object.class.equals( superclass ) )
@@ -95,6 +96,7 @@ public class AutoBindingFeature
                 }
 
                 break;
+
             case INTERFACES:
             default:
                 interfaces = (Class<Object>[]) annotatedClass.getInterfaces();
