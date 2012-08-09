@@ -16,10 +16,11 @@ package org.nnsoft.guice.autobind.annotations;
  *    limitations under the License.
  */
 
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Annotation;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
@@ -28,16 +29,14 @@ import javax.inject.Qualifier;
  * Can be used to tell the autobind which annotations should be recognized.
  * If {@link AnnotatedWith} is not used or {@link AnnotatedWith}.annotations() is empty,
  * all annotations will be used, which can be found.
- *
- * @author Daniel Manzke
  */
-@Retention( RetentionPolicy.RUNTIME )
 @Qualifier
 @GuiceAnnotation
-@Target( { ElementType.TYPE } )
+@Retention( RUNTIME )
+@Target( { TYPE } )
 public @interface AnnotatedWith
 {
 
-	Class<? super Annotation>[] value() default {};
+    Class<? super Annotation>[] value() default {};
 
 }
