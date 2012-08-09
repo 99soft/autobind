@@ -16,6 +16,8 @@ package org.nnsoft.guice.autobind.scanner;
  *    limitations under the License.
  */
 
+import static java.lang.System.getProperty;
+
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Logger.getLogger;
@@ -75,7 +77,7 @@ public abstract class StartupModule
 
     protected boolean bindStartupConfiguration = true;
 
-    protected boolean verbose = ( System.getProperty( "gab.verbose" ) != null ? true : false );
+    protected boolean verbose = ( getProperty( "gab.verbose" ) != null ? true : false );
 
     public StartupModule( Class<? extends ClasspathScanner> scanner, PackageFilter... filter )
     {
