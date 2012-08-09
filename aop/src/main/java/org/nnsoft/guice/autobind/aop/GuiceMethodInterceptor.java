@@ -27,26 +27,32 @@ import com.google.inject.matcher.Matcher;
  * If you don't want to use the {@link Invoke}, {@link MethodMatcher} and
  * {@link ClassMatcher} Annotation, your {@link MethodInterceptor} could inherit
  * of this class.
- *
- * @author Daniel Manzke
- *
  */
-public abstract class GuiceMethodInterceptor implements MethodInterceptor {
-	public static Type CLASS_MATCHER_TYPE;
-	public static Type METHOD_MATCHER_TYPE;
+public abstract class GuiceMethodInterceptor
+    implements MethodInterceptor
+{
 
-	static {
-		try {
-			CLASS_MATCHER_TYPE = GuiceMethodInterceptor.class.getMethod("getClassMatcher",
-				new Class<?>[0]).getGenericReturnType();
-			METHOD_MATCHER_TYPE = GuiceMethodInterceptor.class.getMethod("getMethodMatcher",
-				new Class<?>[0]).getGenericReturnType();
-		} catch (Exception e) {
-			// ignore
-		}
-	}
+    public static Type CLASS_MATCHER_TYPE;
 
-	public abstract Matcher<? super Class<?>> getClassMatcher();
+    public static Type METHOD_MATCHER_TYPE;
 
-	public abstract Matcher<? super Method> getMethodMatcher();
+    static
+    {
+        try
+        {
+            CLASS_MATCHER_TYPE =
+                GuiceMethodInterceptor.class.getMethod( "getClassMatcher", new Class<?>[0] ).getGenericReturnType();
+            METHOD_MATCHER_TYPE =
+                GuiceMethodInterceptor.class.getMethod( "getMethodMatcher", new Class<?>[0] ).getGenericReturnType();
+        }
+        catch ( Exception e )
+        {
+            // ignore
+        }
+    }
+
+    public abstract Matcher<? super Class<?>> getClassMatcher();
+
+    public abstract Matcher<? super Method> getMethodMatcher();
+
 }
