@@ -25,7 +25,7 @@
 
   <artifactId>autobind-configuration</artifactId>
   <name>org.nnsoft.guice.autobind.configuration</name>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.nnsoft.guice.autobind</groupId>
@@ -33,12 +33,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-    	<groupId>org.99soft.guice</groupId>
-    	<artifactId>rocoto</artifactId>
-    	<version>6.1</version>
+      <groupId>org.99soft.guice</groupId>
+      <artifactId>rocoto</artifactId>
+      <version>6.1</version>
     </dependency>
   </dependencies>
-  
 
   <!-- build>
     <resources>
