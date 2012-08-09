@@ -17,10 +17,12 @@ package org.nnsoft.guice.autobind.annotations.features;
  */
 
 import static java.lang.String.format;
+import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Logger.getLogger;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Singleton;
@@ -38,7 +40,7 @@ public class ModuleBindingFeature
     extends BindingScannerFeature
 {
 
-    private final Logger _logger = Logger.getLogger( getClass().getName() );
+    private final Logger _logger = getLogger( getClass().getName() );
 
     @Override
     public BindingStage accept( Class<Object> annotatedClass, Map<String, Annotation> annotations )
@@ -57,7 +59,7 @@ public class ModuleBindingFeature
         BindingJob job = new ModuleBindingJob( annotatedClass.getName() );
         if ( !tracer.contains( job ) )
         {
-            if ( _logger.isLoggable( Level.INFO ) )
+            if ( _logger.isLoggable( INFO ) )
             {
                 _logger.info( "Installing Module: " + annotatedClass.getName() );
             }
@@ -70,13 +72,13 @@ public class ModuleBindingFeature
         {
             String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
 
-            if ( _logger.isLoggable( Level.FINE ) )
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.FINE, message, new Exception( message ) );
+                _logger.log( FINE, message, new Exception( message ) );
             }
-            else if ( _logger.isLoggable( Level.INFO ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.INFO, message );
+                _logger.log( INFO, message );
             }
         }
     }
