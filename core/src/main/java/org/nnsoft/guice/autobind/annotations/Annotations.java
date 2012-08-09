@@ -25,7 +25,6 @@ import javax.inject.Named;
 
 import org.nnsoft.guice.autobind.annotations.To.Type;
 
-
 public class Annotations
 {
 
@@ -36,10 +35,10 @@ public class Annotations
     {
         // do nothing
     }
-    
+
     public static Bind createBind()
     {
-    	return createBind( Type.INTERFACES );
+        return createBind( Type.INTERFACES );
     }
 
     public static Bind createBind( final Type type )
@@ -58,10 +57,10 @@ public class Annotations
             {
                 return named( "" );
             }
-            
+
             @Override
             public AnnotatedWith annotatedWith() {
-            	return null;
+                return null;
             }
 
             @Override
@@ -78,13 +77,13 @@ public class Annotations
 
         };
     }
-    
+
     @SuppressWarnings("unchecked")
-	public static AnnotatedWith createAnnotatedWith( )
+    public static AnnotatedWith createAnnotatedWith( )
     {
         return createAnnotatedWith( (Class<? super Annotation>[]) Array.newInstance(Annotation.class, 0) );
     }
-    
+
     public static AnnotatedWith createAnnotatedWith( final Class<? super Annotation>... annotations )
     {
         return new AnnotatedWith()
@@ -96,18 +95,18 @@ public class Annotations
                 return AnnotatedWith.class;
             }
 
-			@Override
+            @Override
             public Class<? super Annotation>[] value()
             {
                 return annotations;
             }
 
         };
-    }  
-    
+    }
+
     public static To createTo()
     {
-    	return createTo( Type.INTERFACES );
+        return createTo( Type.INTERFACES );
     }
 
     public static To createTo( final Type type )
