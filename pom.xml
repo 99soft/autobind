@@ -54,8 +54,8 @@
   </developers>
 
   <modules>
-    <module>annotations</module>
     <module>core</module>
+    <module>configuration</module>
     <module>examples</module>
     <module>integrations</module>
     <module>scanner</module>
