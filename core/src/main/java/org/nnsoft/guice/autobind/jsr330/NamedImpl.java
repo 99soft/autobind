@@ -23,6 +23,7 @@ import java.lang.annotation.Annotation;
 
 import javax.inject.Named;
 
+@SuppressWarnings( "all" ) // TODO didn't fine the right value to suppress the specific warning
 class NamedImpl
     implements Named, Serializable
 {
