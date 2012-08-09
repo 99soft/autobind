@@ -16,6 +16,7 @@ package org.nnsoft.guice.autobind.annotations.features;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
 import static com.google.inject.multibindings.Multibinder.newSetBinder;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
@@ -84,17 +85,15 @@ public class MultiBindingFeature
         }
         else
         {
+            String message = format( "Ignoring Multi-BindingJob \"%s\", because it was already bound.", job );
+
             if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( FINE, "Ignoring Multi-BindingJob \"" + job.toString()
-                                 + "\", because it was already bound.",
-                             new Exception( "Ignoring Multi-BindingJob \"" + job.toString()
-                                 + "\", because it was already bound." ) );
+                _logger.log( FINE, message, new Exception( message ) );
             }
             else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( INFO, "Ignoring Multi-BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( INFO, message );
             }
         }
     }
