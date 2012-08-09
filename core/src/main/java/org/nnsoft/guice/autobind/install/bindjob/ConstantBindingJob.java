@@ -27,10 +27,4 @@ public class ConstantBindingJob
         super( null, null, annotated, className, "constant" );
     }
 
-    @Override
-    public String toString()
-    {
-        return "Constant" + super.toString();
-    }
-
 }

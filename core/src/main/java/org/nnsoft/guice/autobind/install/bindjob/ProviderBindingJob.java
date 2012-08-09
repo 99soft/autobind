@@ -31,10 +31,4 @@ public class ProviderBindingJob
         super( scoped, provided, annotated, null, interfaceName );
     }
 
-    @Override
-    public String toString()
-    {
-        return "Provider" + super.toString();
-    }
-
 }

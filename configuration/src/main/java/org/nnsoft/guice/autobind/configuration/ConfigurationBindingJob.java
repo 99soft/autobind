@@ -34,7 +34,7 @@ public class ConfigurationBindingJob
     @Override
     public String toString()
     {
-        return toStringHelper( getClass() )
+        return toStringHelper( getClass().getSimpleName() )
                .add( "annotated", annotated )
                .add( "className", className )
                .toString();

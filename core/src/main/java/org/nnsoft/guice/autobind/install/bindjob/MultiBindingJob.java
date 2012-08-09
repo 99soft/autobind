@@ -34,10 +34,4 @@ public class MultiBindingJob
         return hashCode( annotated, className, interfaceName, provided, scoped );
     }
 
-    @Override
-    public String toString()
-    {
-        return "Multi" + super.toString();
-    }
-
 }

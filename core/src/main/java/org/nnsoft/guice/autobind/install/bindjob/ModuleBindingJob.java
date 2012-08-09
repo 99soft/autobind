@@ -25,10 +25,4 @@ public class ModuleBindingJob
         super( null, null, null, moduleName, null );
     }
 
-    @Override
-    public String toString()
-    {
-        return "Module" + super.toString();
-    }
-
 }

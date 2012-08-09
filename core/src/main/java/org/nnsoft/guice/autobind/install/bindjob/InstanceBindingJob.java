@@ -34,10 +34,4 @@ public class InstanceBindingJob
         return hashCode( annotated, interfaceName, provided, scoped );
     }
 
-    @Override
-    public String toString()
-    {
-        return "Instance" + super.toString();
-    }
-
 }

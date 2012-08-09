@@ -27,10 +27,4 @@ public class ImplementationBindingJob
         super( scoped, null, annotated, className, null );
     }
 
-    @Override
-    public String toString()
-    {
-        return "Implementation" + super.toString();
-    }
-
 }
