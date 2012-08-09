@@ -56,7 +56,7 @@ public abstract class BindingScannerFeature
     implements ScannerFeature
 {
 
-    private Logger _logger = Logger.getLogger( BindingScannerFeature.class.getName() );
+    private final Logger _logger = Logger.getLogger( BindingScannerFeature.class.getName() );
 
     protected Set<String> others = new HashSet<String>();
 
