@@ -16,6 +16,7 @@ package org.nnsoft.guice.autobind.scanner;
  *    limitations under the License.
  */
 
+import static java.lang.System.getProperty;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.SEVERE;
@@ -46,7 +47,7 @@ public class ScannerModule
     implements Module
 {
 
-    public static String LINE_SEPARATOR = System.getProperty( "line.separator" );
+    public static String LINE_SEPARATOR = getProperty( "line.separator" );
 
     private final Logger _logger = getLogger( getClass().getName() );
 
