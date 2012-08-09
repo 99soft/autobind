@@ -16,9 +16,11 @@ package org.nnsoft.guice.autobind.aop;
  *    limitations under the License.
  */
 
-import java.lang.annotation.ElementType;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -27,12 +29,15 @@ import org.aopalliance.intercept.MethodInterceptor;
  * This is an Annotation, which can be used to create a {@link MethodMatcher},
  * so an {@link MethodInterceptor} knows which Method to monitor.
  *
- * @Intercept public String sayHello() { return "yeahhh!!!"; }
- *
- * @author Daniel Manzke
- *
+ * <pre>@Intercept
+ * public String sayHello()
+ * {
+ *     return "yeahhh!!!";
+ * }</pre>
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target( { ElementType.METHOD })
-public @interface Intercept {
+@Documented
+@Retention( RUNTIME )
+@Target( { METHOD } )
+public @interface Intercept
+{
 }

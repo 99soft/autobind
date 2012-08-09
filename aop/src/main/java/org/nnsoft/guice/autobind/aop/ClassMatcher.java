@@ -30,7 +30,8 @@ import org.aopalliance.intercept.MethodInterceptor;
  * {@link Matcher}. This Matcher is used by Guice, to decide if a
  * {@link MethodInterceptor} should be invoked for that {@link Class}.
  *
- * <pre>ClassMatcher public Matcher<? super Class<?>> getClassMatcher()
+ * <pre>@ClassMatcher
+ * public Matcher<? super Class<?>> getClassMatcher()
  * {
  *     return Matchers.any();
  * }</pre>
