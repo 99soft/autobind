@@ -58,7 +58,7 @@ public abstract class StartupModule
     extends AbstractModule
 {
 
-    protected Logger _logger = Logger.getLogger( StartupModule.class.getName() );
+    protected final Logger _logger = Logger.getLogger( StartupModule.class.getName() );
 
     protected PackageFilter[] _packages;
 
