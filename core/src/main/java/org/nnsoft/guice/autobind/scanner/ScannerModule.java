@@ -65,8 +65,9 @@ public class ScannerModule
     {
         if ( _logger.isLoggable( INFO ) )
         {
-            StringBuilder builder = new StringBuilder();
-            builder.append( _scanner.getClass().getName() + " is using following Scanner Features: " ).append( LINE_SEPARATOR );
+            StringBuilder builder = new StringBuilder( _scanner.getClass().getName() )
+                                    .append( " is using following Scanner Features: " )
+                                    .append( LINE_SEPARATOR );
             for ( ScannerFeature listener : _listeners )
             {
                 builder.append( listener.getClass().getName() ).append( LINE_SEPARATOR );
