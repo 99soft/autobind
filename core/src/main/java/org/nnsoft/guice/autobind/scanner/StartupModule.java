@@ -77,7 +77,7 @@ public abstract class StartupModule
 
     protected boolean bindStartupConfiguration = true;
 
-    protected boolean verbose = ( getProperty( "gab.verbose" ) != null ? true : false );
+    protected boolean verbose = ( getProperty( "org.nnsoft.guice.autobind.verbose" ) != null ? true : false );
 
     public StartupModule( Class<? extends ClasspathScanner> scanner, PackageFilter... filter )
     {
