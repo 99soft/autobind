@@ -16,9 +16,13 @@ package org.nnsoft.guice.autobind.scanner;
  *    limitations under the License.
  */
 
+import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Level.SEVERE;
+import static java.util.logging.Logger.getLogger;
+
 import java.io.IOException;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -44,7 +48,7 @@ public class ScannerModule
 
     public static String LINE_SEPARATOR = System.getProperty( "line.separator" );
 
-    private final Logger _logger = Logger.getLogger( getClass().getName() );
+    private final Logger _logger = getLogger( getClass().getName() );
 
     @Inject
     private ClasspathScanner _scanner;
@@ -58,7 +62,7 @@ public class ScannerModule
     @Override
     public void configure( Binder binder )
     {
-        if ( _logger.isLoggable( Level.INFO ) )
+        if ( _logger.isLoggable( INFO ) )
         {
             StringBuilder builder = new StringBuilder();
             builder.append( _scanner.getClass().getName() + " is using following Scanner Features: " ).append( LINE_SEPARATOR );
@@ -66,14 +70,14 @@ public class ScannerModule
             {
                 builder.append( listener.getClass().getName() ).append( LINE_SEPARATOR );
             }
-            _logger.log( Level.INFO, builder.toString() );
+            _logger.log( INFO, builder.toString() );
         }
         for ( ScannerFeature listener : _listeners )
         {
             if ( listener instanceof BindingScannerFeature )
             {
                 ( (BindingScannerFeature) listener ).setBinder( binder );
-                if ( _logger.isLoggable( Level.FINE ) )
+                if ( _logger.isLoggable( FINE ) )
                 {
                     _logger.fine( "Binding AnnotationListeners " + listener.getClass().getName() );
                 }
@@ -85,7 +89,7 @@ public class ScannerModule
         }
         catch ( IOException e )
         {
-            _logger.log( Level.SEVERE, "Failure while Scanning the Classpath for Classes with Annotations.", e );
+            _logger.log( SEVERE, "Failure while Scanning the Classpath for Classes with Annotations.", e );
         }
         try
         {
@@ -93,7 +97,7 @@ public class ScannerModule
         }
         catch ( Exception e )
         {
-            _logger.log( Level.SEVERE, "Failure while executing the collected Tasks.", e );
+            _logger.log( SEVERE, "Failure while executing the collected Tasks.", e );
         }
     }
 
