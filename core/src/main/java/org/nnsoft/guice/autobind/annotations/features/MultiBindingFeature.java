@@ -17,12 +17,13 @@ package org.nnsoft.guice.autobind.annotations.features;
  */
 
 import static com.google.inject.multibindings.Multibinder.newSetBinder;
+import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.INFO;
 import static org.nnsoft.guice.autobind.install.BindingStage.BINDING;
 import static org.nnsoft.guice.autobind.install.BindingStage.IGNORE;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
-import java.util.logging.Level;
 
 import javax.inject.Singleton;
 
@@ -83,16 +84,16 @@ public class MultiBindingFeature
         }
         else
         {
-            if ( _logger.isLoggable( Level.FINE ) )
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.FINE, "Ignoring Multi-BindingJob \"" + job.toString()
+                _logger.log( FINE, "Ignoring Multi-BindingJob \"" + job.toString()
                                  + "\", because it was already bound.",
                              new Exception( "Ignoring Multi-BindingJob \"" + job.toString()
                                  + "\", because it was already bound." ) );
             }
-            else if ( _logger.isLoggable( Level.INFO ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.INFO, "Ignoring Multi-BindingJob \"" + job.toString()
+                _logger.log( INFO, "Ignoring Multi-BindingJob \"" + job.toString()
                     + "\", because it was already bound." );
             }
         }
