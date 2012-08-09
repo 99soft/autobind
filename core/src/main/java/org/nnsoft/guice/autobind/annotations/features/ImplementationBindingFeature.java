@@ -16,11 +16,14 @@ package org.nnsoft.guice.autobind.annotations.features;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
+import static java.util.logging.Level.FINE;
 import static org.nnsoft.guice.autobind.annotations.To.Type.IMPLEMENTATION;
+import static org.nnsoft.guice.autobind.install.BindingStage.BINDING;
+import static org.nnsoft.guice.autobind.install.BindingStage.IGNORE;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
-import java.util.logging.Level;
 
 import javax.inject.Singleton;
 
@@ -39,10 +42,10 @@ public class ImplementationBindingFeature
             Bind annotation = (Bind) annotations.get( Bind.class.getName() );
             if ( !annotation.multiple() && ( IMPLEMENTATION == annotation.to().value() ) )
             {
-                return BindingStage.BINDING;
+                return BINDING;
             }
         }
-        return BindingStage.IGNORE;
+        return IGNORE;
     }
 
     @Override
@@ -51,9 +54,9 @@ public class ImplementationBindingFeature
         final boolean asSingleton =
             ( annotations.containsKey( com.google.inject.Singleton.class.getName() ) || annotations.containsKey( javax.inject.Singleton.class.getName() ) );
 
-        if ( _logger.isLoggable( Level.FINE ) )
+        if ( _logger.isLoggable( FINE ) )
         {
-            _logger.fine( String.format( "Binding Class %s. Singleton? %s ", annotatedClass, asSingleton ) );
+            _logger.fine( format( "Binding Class %s. Singleton? %s ", annotatedClass, asSingleton ) );
         }
 
         bind( annotatedClass, null, ( asSingleton ? Singleton.class : null ) );
