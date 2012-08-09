@@ -16,9 +16,10 @@ package org.nnsoft.guice.autobind.annotations;
  *    limitations under the License.
  */
 
-import java.lang.annotation.ElementType;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.inject.Named;
@@ -36,20 +37,18 @@ import javax.inject.Qualifier;
  * If you annotate your class with {@link com.google.inject.Singleton} or
  * {@link javax.inject.Singleton} they will be also bound to the
  * Singleton-Scope.
- *
- * @author Daniel Manzke
  */
-@Retention( RetentionPolicy.RUNTIME )
 @Qualifier
 @GuiceAnnotation
-@Target( { ElementType.TYPE } )
+@Retention( RUNTIME )
+@Target( { TYPE } )
 public @interface Bind
 {
 
     Named value() default @Named( "" );
 
     boolean multiple() default false;
-    
+
     AnnotatedWith annotatedWith() default @AnnotatedWith();
 
     To to() default @To( );
