@@ -16,8 +16,9 @@ package org.nnsoft.guice.autobind.scanner;
  *    limitations under the License.
  */
 
+import static com.google.inject.Guice.createInjector;
 import static java.lang.System.getProperty;
-
+import static java.util.Collections.addAll;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Logger.getLogger;
@@ -46,7 +47,6 @@ import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
@@ -89,8 +89,8 @@ public abstract class StartupModule
     public void configure()
     {
         List<PackageFilter> packages = new ArrayList<PackageFilter>();
-        Collections.addAll( packages, _packages );
-        Collections.addAll( packages, bindPackages() );
+        addAll( packages, _packages );
+        addAll( packages, bindPackages() );
 
         _packages = packages.toArray( new PackageFilter[packages.size()] );
         Module scannerModule = new AbstractModule()
@@ -142,7 +142,7 @@ public abstract class StartupModule
         // }
 
         // Injector internal = Guice.createInjector(scannerModule, configurationModule);
-        Injector internal = Guice.createInjector( scannerModule );
+        Injector internal = createInjector( scannerModule );
         binder().install( internal.getInstance( ScannerModule.class ) );
         // binder().install(configurationModule);
 
