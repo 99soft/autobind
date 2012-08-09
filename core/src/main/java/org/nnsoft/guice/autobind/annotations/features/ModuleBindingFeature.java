@@ -16,6 +16,8 @@ package org.nnsoft.guice.autobind.annotations.features;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
+
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.logging.Level;
@@ -66,16 +68,15 @@ public class ModuleBindingFeature
         }
         else
         {
+            String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
+
             if ( _logger.isLoggable( Level.FINE ) )
             {
-                _logger.log( Level.FINE, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound.", new Exception( "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." ) );
+                _logger.log( Level.FINE, message, new Exception( message ) );
             }
             else if ( _logger.isLoggable( Level.INFO ) )
             {
-                _logger.log( Level.INFO, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( Level.INFO, message );
             }
         }
     }
