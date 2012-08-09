@@ -44,7 +44,7 @@ public class ScannerModule
 
     public static String LINE_SEPARATOR = System.getProperty( "line.separator" );
 
-    private Logger _logger = Logger.getLogger( ScannerModule.class.getName() );
+    private final Logger _logger = Logger.getLogger( ScannerModule.class.getName() );
 
     @Inject
     private ClasspathScanner _scanner;
