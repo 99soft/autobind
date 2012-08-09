@@ -45,7 +45,7 @@ public class AutoBindingFeature
     extends BindingScannerFeature
 {
 
-    protected Logger _logger = Logger.getLogger( AutoBindingFeature.class.getName() );
+    protected final Logger _logger = Logger.getLogger( AutoBindingFeature.class.getName() );
 
     @Override
     public BindingStage accept( Class<Object> annotatedClass, Map<String, Annotation> annotations )
