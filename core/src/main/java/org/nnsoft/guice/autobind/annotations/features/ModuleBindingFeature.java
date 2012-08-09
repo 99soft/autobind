@@ -36,7 +36,7 @@ public class ModuleBindingFeature
     extends BindingScannerFeature
 {
 
-    private final Logger _logger = Logger.getLogger( ModuleBindingFeature.class.getName() );
+    private final Logger _logger = Logger.getLogger( getClass().getName() );
 
     @Override
     public BindingStage accept( Class<Object> annotatedClass, Map<String, Annotation> annotations )
