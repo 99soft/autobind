@@ -16,6 +16,9 @@ package org.nnsoft.guice.autobind.scanner;
  *    limitations under the License.
  */
 
+import static org.nnsoft.guice.autobind.jsr330.Names.named;
+import static com.google.inject.TypeLiteral.get;
+
 import static com.google.inject.Guice.createInjector;
 import static java.lang.System.getProperty;
 import static java.util.Collections.addAll;
@@ -42,14 +45,12 @@ import org.nnsoft.guice.autobind.annotations.features.MultiBindingFeature;
 import org.nnsoft.guice.autobind.install.BindingTracer;
 import org.nnsoft.guice.autobind.install.InstallationContext;
 import org.nnsoft.guice.autobind.install.bindjob.BindingJob;
-import org.nnsoft.guice.autobind.jsr330.Names;
 import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 
 /**
@@ -110,9 +111,9 @@ public abstract class StartupModule
 
                 binder.bind( InstallationContext.class ).asEagerSingleton();
                 binder.bind( ClasspathScanner.class ).to( _scanner );
-                binder.bind( TypeLiteral.get( PackageFilter[].class ) ).annotatedWith( Names.named( "packages" ) ).toInstance( _packages );
+                binder.bind( get( PackageFilter[].class ) ).annotatedWith( named( "packages" ) ).toInstance( _packages );
                 Set<URL> classpath = findClassPaths();
-                binder.bind( TypeLiteral.get( URL[].class ) ).annotatedWith( Names.named( "classpath" ) ).toInstance( classpath.toArray( new URL[classpath.size()] ) );
+                binder.bind( get( URL[].class ) ).annotatedWith( named( "classpath" ) ).toInstance( classpath.toArray( new URL[classpath.size()] ) );
 
                 bindFeatures( binder );
             }
