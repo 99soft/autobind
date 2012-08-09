@@ -150,8 +150,7 @@ public abstract class StartupModule
         {
             BindingTracer tracer = internal.getInstance( BindingTracer.class );
 
-            StringBuilder builder = new StringBuilder();
-            builder.append( "Following Binding were processed.\n" );
+            StringBuilder builder = new StringBuilder( "Following Binding were processed.\n" );
             for ( BindingJob job : tracer )
             {
                 builder.append( job.toString() ).append( "\n" );
