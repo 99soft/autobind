@@ -34,6 +34,7 @@ import org.nnsoft.guice.autobind.install.BindingStage;
 public class ImplementationBindingFeature
     extends AutoBindingFeature
 {
+
     @Override
     public BindingStage accept( Class<Object> annotatedClass, Map<String, Annotation> annotations )
     {
