@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
 
-
 /**
  * Interface which is used to create ClasspathScanner implementations. Our
  * StartupModule will bind your chosen Implementation to this interface. You
