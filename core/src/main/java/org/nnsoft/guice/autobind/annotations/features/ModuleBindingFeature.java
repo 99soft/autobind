@@ -20,6 +20,7 @@ import static java.lang.String.format;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Logger.getLogger;
+import static org.nnsoft.guice.autobind.install.BindingStage.IGNORE;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class ModuleBindingFeature
             GuiceModule module = (GuiceModule) annotations.get( GuiceModule.class.getName() );
             return module.stage();
         }
-        return BindingStage.IGNORE;
+        return IGNORE;
     }
 
     @Override
