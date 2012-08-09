@@ -25,8 +25,6 @@ import java.util.concurrent.Callable;
 /**
  * This class is internally used, to bind Installation Requests and process them
  * sequentially in a predefined order.
- *
- * @author Daniel Manzke
  */
 public class InstallationContext {
 

@@ -24,7 +24,6 @@ import javax.inject.Singleton;
 
 import org.nnsoft.guice.autobind.install.bindjob.BindingJob;
 
-
 @Singleton
 public class BindingTracer
     implements Iterable<BindingJob>
