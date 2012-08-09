@@ -16,6 +16,8 @@ package org.nnsoft.guice.autobind.install.bindjob;
  *    limitations under the License.
  */
 
+import static com.google.common.base.Objects.equal;
+
 import java.lang.annotation.Annotation;
 
 import javax.inject.Provider;
@@ -61,51 +63,20 @@ public class BindingJob
     public boolean equals( Object obj )
     {
         if ( this == obj )
+        {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null || getClass() != obj.getClass() )
+        {
             return false;
-        if ( getClass() != obj.getClass() )
-            return false;
+        }
         BindingJob other = (BindingJob) obj;
-        if ( annotated == null )
-        {
-            if ( other.annotated != null )
-                return false;
-        }
-        else if ( !annotated.equals( other.annotated ) )
-            return false;
-        if ( interfaceName == null )
-        {
-            if ( className == null )
-            {
-                if ( other.className != null )
-                    return false;
-            }
-            else if ( !className.equals( other.className ) )
-                return false;
-        }
-        if ( interfaceName == null )
-        {
-            if ( other.interfaceName != null )
-                return false;
-        }
-        else if ( !interfaceName.equals( other.interfaceName ) )
-            return false;
-        if ( provided == null )
-        {
-            if ( other.provided != null )
-                return false;
-        }
-        else if ( !provided.equals( other.provided ) )
-            return false;
-        if ( scoped == null )
-        {
-            if ( other.scoped != null )
-                return false;
-        }
-        else if ( !scoped.equals( other.scoped ) )
-            return false;
-        return true;
+
+        return equal( annotated, other.annotated )
+            && equal( interfaceName, other.interfaceName )
+            && equal( className, other.className )
+            && equal( provided, other.provided )
+            && equal( scoped, other.scoped );
     }
 
     @Override
