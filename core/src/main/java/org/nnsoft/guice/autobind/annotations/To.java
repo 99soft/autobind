@@ -20,8 +20,6 @@ import static org.nnsoft.guice.autobind.annotations.To.Type.INTERFACES;
 
 /**
  * Can be used to tell autobind where the class should be bound to.
- * 
- * @author Daniel Manzke
  */
 public @interface To
 {
