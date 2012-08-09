@@ -47,7 +47,7 @@ public class ScannerModule
     implements Module
 {
 
-    public static String LINE_SEPARATOR = getProperty( "line.separator" );
+    private static String LINE_SEPARATOR = getProperty( "line.separator" );
 
     private final Logger _logger = getLogger( getClass().getName() );
 
