@@ -1,7 +1,6 @@
 /**
- * This package includes all annotations which are used to 
+ * This package includes all annotations which are used to
  * annotating class like it would be written with the Guice ESL.
- * 
  */
 package org.nnsoft.guice.autobind.annotations;
 
