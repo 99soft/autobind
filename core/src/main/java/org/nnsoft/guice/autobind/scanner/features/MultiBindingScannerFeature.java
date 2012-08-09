@@ -25,7 +25,6 @@ import org.nnsoft.guice.autobind.scanner.ScannerModule;
 import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.multibindings.Multibinder;
 
-
 /**
  * Default Implementation for Annotation Listeners, which should stay informed
  * abbout found annotated classes. Due the fact, that we need the Binder of the
