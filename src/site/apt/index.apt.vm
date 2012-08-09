@@ -1,0 +1,50 @@
+                                    ------
+                                    Home
+                                    ------
+                                    The 99 Software Foundation
+                                    ------
+                                     2012
+
+~~
+~~   Copyright 2012 The 99 Software Foundation
+~~
+~~   Licensed under the Apache License, Version 2.0 (the "License");
+~~   you may not use this file except in compliance with the License.
+~~   You may obtain a copy of the License at
+~~
+~~       http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~   Unless required by applicable law or agreed to in writing, software
+~~   distributed under the License is distributed on an "AS IS" BASIS,
+~~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~   See the License for the specific language governing permissions and
+~~   limitations under the License.
+~~
+
+Welcome to Autobind!
+
+  Autobind is the automatic Injection/Binding for Google Guice, an extension which add the support for Classpath Scanner
+  and auto registration for Guice-Modules and Beans.
+
+Before starting
+
+  Autobind modules are available on the Maven Central repo,
+  you just need to add the dependency below in your <<<pom.xml>>> file:
+
++--------------------------------------+
+<dependencies>
+  ...
+  <dependency>
+    <groupId>${project.groupId}</groupId>
+    <artifactId>AUTOBIND-MODULE</artifactId>
+    <version>${project.version}</version>
+  </dependency>
+  ...
+</dependencies>
++--------------------------------------+
+
+Acknowledgements
+
+  A big <Thank You> goes to {{{http://devsurf.wordpress.com/}Daniel Manzke}}, who enthusiastically asked to join 99soft
+  donating his long life project {{{https://github.com/manzke/guice-automatic-injection}GAB}}, <Guice Automatic Binding>,
+  today known as 99soft Autobind.
