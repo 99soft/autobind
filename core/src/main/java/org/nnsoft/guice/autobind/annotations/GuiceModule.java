@@ -18,6 +18,7 @@ package org.nnsoft.guice.autobind.annotations;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import static org.nnsoft.guice.autobind.install.BindingStage.BUILD;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -26,12 +27,9 @@ import javax.inject.Qualifier;
 
 import org.nnsoft.guice.autobind.install.BindingStage;
 
-
 /**
  * Annotate a Module with the GuiceModule-Annotation and it will be installed
  * automatically.
- *
- * @author Daniel Manzke
  */
 @Qualifier
 @GuiceAnnotation
@@ -40,6 +38,6 @@ import org.nnsoft.guice.autobind.install.BindingStage;
 public @interface GuiceModule
 {
 
-    BindingStage stage() default BindingStage.BUILD;
+    BindingStage stage() default BUILD;
 
 }
