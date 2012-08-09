@@ -16,12 +16,16 @@ package org.nnsoft.guice.autobind.scanner.features;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
+import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Logger.getLogger;
+
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -56,7 +60,7 @@ public abstract class BindingScannerFeature
     implements ScannerFeature
 {
 
-    private final Logger _logger = Logger.getLogger( BindingScannerFeature.class.getName() );
+    private final Logger _logger = getLogger( BindingScannerFeature.class.getName() );
 
     protected Set<String> others = new HashSet<String>();
 
@@ -143,15 +147,15 @@ public abstract class BindingScannerFeature
         }
         else
         {
-            if ( _logger.isLoggable( Level.INFO ) )
+            String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
+
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.INFO, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound.", new Exception() );
+                _logger.log( FINE, message, new Exception( message ) );
             }
-            else if ( _logger.isLoggable( Level.WARNING ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.WARNING, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( INFO, message );
             }
         }
     }
@@ -180,15 +184,15 @@ public abstract class BindingScannerFeature
         }
         else
         {
-            if ( _logger.isLoggable( Level.INFO ) )
+            String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
+
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.INFO, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound.", new Exception() );
+                _logger.log( FINE, message, new Exception( message ) );
             }
-            else if ( _logger.isLoggable( Level.WARNING ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.WARNING, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( INFO, message );
             }
         }
     }
@@ -215,15 +219,15 @@ public abstract class BindingScannerFeature
         }
         else
         {
-            if ( _logger.isLoggable( Level.INFO ) )
+            String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
+
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.INFO, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound.", new Exception() );
+                _logger.log( FINE, message, new Exception( message ) );
             }
-            else if ( _logger.isLoggable( Level.WARNING ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.WARNING, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( INFO, message );
             }
         }
     }
@@ -241,15 +245,15 @@ public abstract class BindingScannerFeature
         }
         else
         {
-            if ( _logger.isLoggable( Level.INFO ) )
+            String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
+
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.INFO, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound.", new Exception() );
+                _logger.log( FINE, message, new Exception( message ) );
             }
-            else if ( _logger.isLoggable( Level.WARNING ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.WARNING, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( INFO, message );
             }
         }
     }
@@ -279,16 +283,15 @@ public abstract class BindingScannerFeature
         }
         else
         {
-            if ( _logger.isLoggable( Level.FINE ) )
+            String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
+
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.FINE, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound.", new Exception( "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." ) );
+                _logger.log( FINE, message, new Exception( message ) );
             }
-            else if ( _logger.isLoggable( Level.INFO ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.INFO, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( INFO, message );
             }
         }
     }
@@ -316,15 +319,15 @@ public abstract class BindingScannerFeature
         }
         else
         {
-            if ( _logger.isLoggable( Level.INFO ) )
+            String message = format( "Ignoring BindingJob \"%s\", because it was already bound.", job );
+
+            if ( _logger.isLoggable( FINE ) )
             {
-                _logger.log( Level.INFO, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound.", new Exception() );
+                _logger.log( FINE, message, new Exception( message ) );
             }
-            else if ( _logger.isLoggable( Level.WARNING ) )
+            else if ( _logger.isLoggable( INFO ) )
             {
-                _logger.log( Level.WARNING, "Ignoring BindingJob \"" + job.toString()
-                    + "\", because it was already bound." );
+                _logger.log( INFO, message );
             }
         }
     }
