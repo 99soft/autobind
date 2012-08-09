@@ -16,6 +16,7 @@ package org.nnsoft.guice.autobind.annotations;
  *    limitations under the License.
  */
 
+import static org.nnsoft.guice.autobind.annotations.To.Type.INTERFACES;
 import static org.nnsoft.guice.autobind.jsr330.Names.named;
 
 import java.lang.annotation.Annotation;
@@ -38,7 +39,7 @@ public class Annotations
 
     public static Bind createBind()
     {
-        return createBind( Type.INTERFACES );
+        return createBind( INTERFACES );
     }
 
     public static Bind createBind( final Type type )
@@ -106,7 +107,7 @@ public class Annotations
 
     public static To createTo()
     {
-        return createTo( Type.INTERFACES );
+        return createTo( INTERFACES );
     }
 
     public static To createTo( final Type type )
