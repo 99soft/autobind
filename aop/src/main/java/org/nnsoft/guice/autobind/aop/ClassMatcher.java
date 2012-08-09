@@ -16,9 +16,11 @@ package org.nnsoft.guice.autobind.aop;
  *    limitations under the License.
  */
 
-import java.lang.annotation.ElementType;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -28,13 +30,14 @@ import org.aopalliance.intercept.MethodInterceptor;
  * {@link Matcher}. This Matcher is used by Guice, to decide if a
  * {@link MethodInterceptor} should be invoked for that {@link Class}.
  *
- * @ClassMatcher public Matcher<? super Class<?>> getClassMatcher() { return
- *               Matchers.any(); }
- *
- * @author Daniel Manzke
- *
+ * <pre>ClassMatcher public Matcher<? super Class<?>> getClassMatcher()
+ * {
+ *     return Matchers.any();
+ * }</pre>
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target( { ElementType.METHOD })
-public @interface ClassMatcher {
+@Documented
+@Retention( RUNTIME )
+@Target( { METHOD } )
+public @interface ClassMatcher
+{
 }
