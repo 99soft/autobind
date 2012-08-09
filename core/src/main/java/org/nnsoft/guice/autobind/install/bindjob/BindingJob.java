@@ -49,14 +49,7 @@ public class BindingJob
     @Override
     public int hashCode()
     {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ( ( annotated == null ) ? 0 : annotated.hashCode() );
-        result = prime * result + ( ( className == null ) ? 0 : className.hashCode() );
-        result = prime * result + ( ( interfaceName == null ) ? 0 : interfaceName.hashCode() );
-        result = prime * result + ( ( provided == null ) ? 0 : provided.hashCode() );
-        result = prime * result + ( ( scoped == null ) ? 0 : scoped.hashCode() );
-        return result;
+        return hashCode( annotated, className, interfaceName, provided, scoped );
     }
 
     @Override
@@ -77,6 +70,19 @@ public class BindingJob
             && equal( className, other.className )
             && equal( provided, other.provided )
             && equal( scoped, other.scoped );
+    }
+
+    protected static int hashCode( Object...args )
+    {
+        final int prime = 31;
+        int result = 1;
+
+        for ( Object arg : args )
+        {
+            result = prime * result + ( ( arg == null ) ? 0 : arg.hashCode() );
+        }
+
+        return result;
     }
 
     @Override
