@@ -16,6 +16,8 @@ package org.nnsoft.guice.autobind.configuration;
  *    limitations under the License.
  */
 
+import static com.google.common.base.Objects.toStringHelper;
+
 import java.lang.annotation.Annotation;
 
 import org.nnsoft.guice.autobind.install.bindjob.BindingJob;
@@ -32,7 +34,10 @@ public class ConfigurationBindingJob
     @Override
     public String toString()
     {
-        return "ConfigurationBinding [annotated=" + annotated + ", location=" + className + "]";
+        return toStringHelper( getClass() )
+               .add( "annotated", annotated )
+               .add( "className", className )
+               .toString();
     }
 
 }

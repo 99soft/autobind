@@ -17,6 +17,7 @@ package org.nnsoft.guice.autobind.install.bindjob;
  */
 
 import static com.google.common.base.Objects.equal;
+import static com.google.common.base.Objects.toStringHelper;
 
 import java.lang.annotation.Annotation;
 
@@ -88,8 +89,13 @@ public class BindingJob
     @Override
     public String toString()
     {
-        return "BindingJob [annotated=" + annotated + ", className=" + className + ", interfaceName=" + interfaceName
-            + ", provided=" + provided + ", scoped=" + scoped + "]";
+        return toStringHelper( getClass() )
+               .add( "annotated", annotated )
+               .add( "className", className )
+               .add( "interfaceName", interfaceName )
+               .add( "provided", provided )
+               .add( "scoped", scoped )
+               .toString();
     }
 
 }
