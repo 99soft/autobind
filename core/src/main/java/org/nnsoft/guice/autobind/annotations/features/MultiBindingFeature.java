@@ -16,6 +16,9 @@ package org.nnsoft.guice.autobind.annotations.features;
  *    limitations under the License.
  */
 
+import static org.nnsoft.guice.autobind.install.BindingStage.BINDING;
+import static org.nnsoft.guice.autobind.install.BindingStage.IGNORE;
+
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.logging.Level;
@@ -43,10 +46,10 @@ public class MultiBindingFeature
             Bind annotation = (Bind) annotations.get( Bind.class.getName() );
             if ( annotation.multiple() )
             {
-                return BindingStage.BINDING;
+                return BINDING;
             }
         }
-        return BindingStage.IGNORE;
+        return IGNORE;
     }
 
     @Override
