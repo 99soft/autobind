@@ -16,11 +16,16 @@ package org.nnsoft.guice.autobind.annotations.features;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
+import static java.util.Collections.addAll;
+import static java.util.logging.Logger.getLogger;
 import static org.nnsoft.guice.autobind.annotations.To.Type.IMPLEMENTATION;
+import static org.nnsoft.guice.autobind.install.BindingStage.BINDING;
+import static org.nnsoft.guice.autobind.install.BindingStage.IGNORE;
+import static org.nnsoft.guice.autobind.jsr330.Names.named;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +40,6 @@ import javax.inject.Singleton;
 import org.nnsoft.guice.autobind.annotations.Bind;
 import org.nnsoft.guice.autobind.annotations.GuiceAnnotation;
 import org.nnsoft.guice.autobind.install.BindingStage;
-import org.nnsoft.guice.autobind.jsr330.Names;
 import org.nnsoft.guice.autobind.scanner.features.BindingScannerFeature;
 
 import com.google.inject.BindingAnnotation;
@@ -45,7 +49,7 @@ public class AutoBindingFeature
     extends BindingScannerFeature
 {
 
-    protected final Logger _logger = Logger.getLogger( getClass().getName() );
+    protected final Logger _logger = getLogger( getClass().getName() );
 
     @Override
     public BindingStage accept( Class<Object> annotatedClass, Map<String, Annotation> annotations )
@@ -55,10 +59,10 @@ public class AutoBindingFeature
             Bind annotation = (Bind) annotations.get( Bind.class.getName() );
             if ( !annotation.multiple() && !( IMPLEMENTATION == annotation.to().value() ) )
             {
-                return BindingStage.BINDING;
+                return BINDING;
             }
         }
-        return BindingStage.IGNORE;
+        return IGNORE;
     }
 
     @SuppressWarnings( "unchecked" )
@@ -73,7 +77,7 @@ public class AutoBindingFeature
 
         if ( annotation.value().value().length() > 0 )
         {
-            filtered.put( Named.class.getName(), Names.named( resolver.resolve( annotation.value().value() ) ) );
+            filtered.put( Named.class.getName(), named( resolver.resolve( annotation.value().value() ) ) );
         }
 
         Class<Object>[] interfaces;
@@ -106,7 +110,7 @@ public class AutoBindingFeature
                     Class<? super Object> parent = annotatedClass.getSuperclass();
                     while ( parent != null && !parent.equals( Object.class ) )
                     {
-                        Collections.addAll( interfaceCollection, parent.getInterfaces() );
+                        addAll( interfaceCollection, parent.getInterfaces() );
                         parent = parent.getSuperclass();
                     }
                     interfaces = interfaceCollection.toArray( new Class[interfaceCollection.size()] );
@@ -122,8 +126,8 @@ public class AutoBindingFeature
         {
             if ( _logger.isLoggable( Level.FINE ) )
             {
-                _logger.fine( String.format( "Binding Class %s to Interface %s. Singleton? %s ", annotatedClass,
-                                             interf, asSingleton ) );
+                _logger.fine( format( "Binding Class %s to Interface %s. Singleton? %s ",
+                                      annotatedClass, interf, asSingleton ) );
             }
 
             if ( filtered.size() > 0 )
