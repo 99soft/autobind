@@ -47,212 +47,255 @@ import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 
-
 /**
  * The StartupModule is used for creating an initial Injector, which binds and
  * instantiates the Scanning module. Due the fact that we have multiple Scanner
  * Implementations, you have to pass the Class for the Scanner and the Packages
  * which should be scanned. You can override the bindAnnotationListeners-Method,
  * to add your own {@link ScannerFeature}.
- *
  */
-public abstract class StartupModule extends AbstractModule {
-	protected Logger _logger = Logger.getLogger(StartupModule.class.getName());
-	protected PackageFilter[] _packages;
-	protected Class<? extends ClasspathScanner> _scanner;
-	protected List<Class<? extends ScannerFeature>> _features = new ArrayList<Class<? extends ScannerFeature>>();
-	protected boolean bindSystemProperties;
-	protected boolean bindEnvironment;
-	protected boolean bindStartupConfiguration = true;
-	protected boolean verbose = (System.getProperty("gab.verbose") != null ? true :false);
+public abstract class StartupModule
+    extends AbstractModule
+{
 
-	public StartupModule(Class<? extends ClasspathScanner> scanner, PackageFilter... filter) {
-		_packages = (filter == null ? new PackageFilter[0] : filter);
-		_scanner = scanner;
-	}
+    protected Logger _logger = Logger.getLogger( StartupModule.class.getName() );
 
-	@Override
-	public void configure() {
-		List<PackageFilter> packages = new ArrayList<PackageFilter>();
-		Collections.addAll(packages, _packages);
-		Collections.addAll(packages, bindPackages());
+    protected PackageFilter[] _packages;
 
-		_packages = packages.toArray(new PackageFilter[packages.size()]);
-		Module scannerModule = new AbstractModule() {
-			@Override
-			protected void configure() {
-				Binder binder = binder();
-				if (_logger.isLoggable(Level.FINE)) {
-					_logger.fine("Binding ClasspathScanner to " + _scanner.getName());
-					for (PackageFilter p : _packages) {
-						_logger.fine("Using Package " + p + " for scanning.");
-					}
-				}
+    protected Class<? extends ClasspathScanner> _scanner;
 
-				binder.bind(InstallationContext.class).asEagerSingleton();
-				binder.bind(ClasspathScanner.class).to(_scanner);
-				binder.bind(TypeLiteral.get(PackageFilter[].class)).annotatedWith(Names.named("packages"))
-					.toInstance(_packages);
-				Set<URL> classpath = findClassPaths();
-				binder.bind(TypeLiteral.get(URL[].class)).annotatedWith(Names.named("classpath"))
-					.toInstance(classpath.toArray(new URL[classpath.size()]));
+    protected List<Class<? extends ScannerFeature>> _features = new ArrayList<Class<? extends ScannerFeature>>();
 
-				bindFeatures(binder);
-			}
-		};
+    protected boolean bindSystemProperties;
 
-//		ConfigurationModule configurationModule = new ConfigurationModule();
-//		if (bindSystemProperties) {
-//			configurationModule.addConfigurationReader(new SystemPropertiesReader());
-//		}
-//		if (bindEnvironment) {
-//			configurationModule.addConfigurationReader(new EnvironmentVariablesReader());
-//		}
+    protected boolean bindEnvironment;
 
-//		if(bindStartupConfiguration){
-//			URL startup = getClass().getResource("/conf/startup.xml");
-//			if(startup != null){
-//				try {
-//					URI startupURI = startup.toURI();
-//					_logger.log(Level.INFO, "Startup Config is used from Path: "+startupURI);
-//					configurationModule.addConfigurationReader(new PropertiesURLReader(new File(startupURI), true));
-//				} catch (URISyntaxException e) {
-//					_logger.log(Level.INFO, "Startup Config couldn't be found in Classpath.", e);
-//				}
-//			}else{
-//				_logger.log(Level.INFO, "Startup Config couldn't be found, so it is not used.");
-//			}
-//		}
+    protected boolean bindStartupConfiguration = true;
 
-//		Injector internal = Guice.createInjector(scannerModule, configurationModule);
-		Injector internal = Guice.createInjector(scannerModule);
-		binder().install(internal.getInstance(ScannerModule.class));
-//		binder().install(configurationModule);
+    protected boolean verbose = ( System.getProperty( "gab.verbose" ) != null ? true : false );
 
-		if(verbose){
-			BindingTracer tracer = internal.getInstance(BindingTracer.class);
+    public StartupModule( Class<? extends ClasspathScanner> scanner, PackageFilter... filter )
+    {
+        _packages = ( filter == null ? new PackageFilter[0] : filter );
+        _scanner = scanner;
+    }
 
-			StringBuilder builder = new StringBuilder();
-			builder.append("Following Binding were processed.\n");
-			for(BindingJob job : tracer){
-				builder.append(job.toString()).append("\n");
-			}
-			_logger.info(builder.toString());
-		}
-	}
+    @Override
+    public void configure()
+    {
+        List<PackageFilter> packages = new ArrayList<PackageFilter>();
+        Collections.addAll( packages, _packages );
+        Collections.addAll( packages, bindPackages() );
 
-	protected abstract Multibinder<ScannerFeature> bindFeatures(Binder binder);
+        _packages = packages.toArray( new PackageFilter[packages.size()] );
+        Module scannerModule = new AbstractModule()
+        {
+            @Override
+            protected void configure()
+            {
+                Binder binder = binder();
+                if ( _logger.isLoggable( Level.FINE ) )
+                {
+                    _logger.fine( "Binding ClasspathScanner to " + _scanner.getName() );
+                    for ( PackageFilter p : _packages )
+                    {
+                        _logger.fine( "Using Package " + p + " for scanning." );
+                    }
+                }
 
-	protected PackageFilter[] bindPackages() {
-		return new PackageFilter[0];
-	}
+                binder.bind( InstallationContext.class ).asEagerSingleton();
+                binder.bind( ClasspathScanner.class ).to( _scanner );
+                binder.bind( TypeLiteral.get( PackageFilter[].class ) ).annotatedWith( Names.named( "packages" ) ).toInstance( _packages );
+                Set<URL> classpath = findClassPaths();
+                binder.bind( TypeLiteral.get( URL[].class ) ).annotatedWith( Names.named( "classpath" ) ).toInstance( classpath.toArray( new URL[classpath.size()] ) );
 
-	protected Set<URL> findClassPaths() {
-		Set<URL> urlSet = new HashSet<URL>();
+                bindFeatures( binder );
+            }
+        };
 
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		while (loader != null) {
-			if (loader instanceof URLClassLoader) {
-				URL[] urls = ((URLClassLoader) loader).getURLs();
-				Collections.addAll(urlSet, urls);
-			}
-			loader = loader.getParent();
-		}
+        // ConfigurationModule configurationModule = new ConfigurationModule();
+        // if (bindSystemProperties) {
+        // configurationModule.addConfigurationReader(new SystemPropertiesReader());
+        // }
+        // if (bindEnvironment) {
+        // configurationModule.addConfigurationReader(new EnvironmentVariablesReader());
+        // }
 
-		String classpath = System.getProperty("java.class.path");
-		if(classpath != null && classpath.length() > 0){
-			try {
-				URL resource = StartupModule.class.getResource("/");
+        // if(bindStartupConfiguration){
+        // URL startup = getClass().getResource("/conf/startup.xml");
+        // if(startup != null){
+        // try {
+        // URI startupURI = startup.toURI();
+        // _logger.log(Level.INFO, "Startup Config is used from Path: "+startupURI);
+        // configurationModule.addConfigurationReader(new PropertiesURLReader(new File(startupURI), true));
+        // } catch (URISyntaxException e) {
+        // _logger.log(Level.INFO, "Startup Config couldn't be found in Classpath.", e);
+        // }
+        // }else{
+        // _logger.log(Level.INFO, "Startup Config couldn't be found, so it is not used.");
+        // }
+        // }
 
-				if ( resource == null ){
-					String className = StartupModule.class.getName().replace('.', '/') + ".class";
-					resource = StartupModule.class.getResource( className );
+        // Injector internal = Guice.createInjector(scannerModule, configurationModule);
+        Injector internal = Guice.createInjector( scannerModule );
+        binder().install( internal.getInstance( ScannerModule.class ) );
+        // binder().install(configurationModule);
 
-					if ( resource != null ){
-						String url = resource.toExternalForm();
-						url = url.substring( 0, url.length() - className.length() );
-						resource = new URL( url );
-					}
-				}
+        if ( verbose )
+        {
+            BindingTracer tracer = internal.getInstance( BindingTracer.class );
 
-				if(resource != null){
-					classpath = classpath + File.pathSeparator + new File(resource.toURI()).getAbsolutePath();
-				}
-			} catch (URISyntaxException e) {
-				//FIXME ignore for now
-			} catch (MalformedURLException e) {
-				//FIXME ignore for now
-			}
+            StringBuilder builder = new StringBuilder();
+            builder.append( "Following Binding were processed.\n" );
+            for ( BindingJob job : tracer )
+            {
+                builder.append( job.toString() ).append( "\n" );
+            }
+            _logger.info( builder.toString() );
+        }
+    }
 
-			for (String path : classpath.split(File.pathSeparator)) {
-				File file = new File(path);
-				try {
-					if (file.exists()) {
-						urlSet.add(file.toURI().toURL());
-					}
-				} catch (MalformedURLException e) {
-					_logger.log(Level.INFO, "Found invalid URL in Classpath: " + path, e);
-				}
-			}
-		}
+    protected abstract Multibinder<ScannerFeature> bindFeatures( Binder binder );
 
-		return urlSet;
-	}
+    protected PackageFilter[] bindPackages()
+    {
+        return new PackageFilter[0];
+    }
 
-	public StartupModule addFeature(Class<? extends ScannerFeature> listener) {
-		_features.add(listener);
-		return this;
-	}
+    protected Set<URL> findClassPaths()
+    {
+        Set<URL> urlSet = new HashSet<URL>();
 
-	public StartupModule bindSystemProperties() {
-		bindSystemProperties = true;
-		return this;
-	}
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        while ( loader != null )
+        {
+            if ( loader instanceof URLClassLoader )
+            {
+                URL[] urls = ( (URLClassLoader) loader ).getURLs();
+                Collections.addAll( urlSet, urls );
+            }
+            loader = loader.getParent();
+        }
 
-	public StartupModule disableStartupConfiguration() {
-		bindStartupConfiguration = false;
-		return this;
-	}
+        String classpath = System.getProperty( "java.class.path" );
+        if ( classpath != null && classpath.length() > 0 )
+        {
+            try
+            {
+                URL resource = StartupModule.class.getResource( "/" );
 
-	public StartupModule bindEnvironment() {
-		bindEnvironment = true;
-		return this;
-	}
+                if ( resource == null )
+                {
+                    String className = StartupModule.class.getName().replace( '.', '/' ) + ".class";
+                    resource = StartupModule.class.getResource( className );
 
-	public void verbose(){
-		verbose = true;
-	}
+                    if ( resource != null )
+                    {
+                        String url = resource.toExternalForm();
+                        url = url.substring( 0, url.length() - className.length() );
+                        resource = new URL( url );
+                    }
+                }
 
-	public static StartupModule create(Class<? extends ClasspathScanner> scanner,
-			PackageFilter... filter) {
-		return new DefaultStartupModule(scanner, filter);
-	}
+                if ( resource != null )
+                {
+                    classpath = classpath + File.pathSeparator + new File( resource.toURI() ).getAbsolutePath();
+                }
+            }
+            catch ( URISyntaxException e )
+            {
+                // FIXME ignore for now
+            }
+            catch ( MalformedURLException e )
+            {
+                // FIXME ignore for now
+            }
 
-	public static class DefaultStartupModule extends StartupModule {
-		public DefaultStartupModule(Class<? extends ClasspathScanner> scanner, PackageFilter... filter) {
-			super(scanner, filter);
-		}
+            for ( String path : classpath.split( File.pathSeparator ) )
+            {
+                File file = new File( path );
+                try
+                {
+                    if ( file.exists() )
+                    {
+                        urlSet.add( file.toURI().toURL() );
+                    }
+                }
+                catch ( MalformedURLException e )
+                {
+                    _logger.log( Level.INFO, "Found invalid URL in Classpath: " + path, e );
+                }
+            }
+        }
 
-		@Override
-		protected Multibinder<ScannerFeature> bindFeatures(Binder binder) {
-			Multibinder<ScannerFeature> listeners = Multibinder.newSetBinder(binder,
-				ScannerFeature.class);
-			listeners.addBinding().to(AutoBindingFeature.class);
-			listeners.addBinding().to(ImplementationBindingFeature.class);
-			listeners.addBinding().to(MultiBindingFeature.class);
-			listeners.addBinding().to(ModuleBindingFeature.class);
+        return urlSet;
+    }
 
-			for (Class<? extends ScannerFeature> listener : _features) {
-				listeners.addBinding().to(listener);
-			}
+    public StartupModule addFeature( Class<? extends ScannerFeature> listener )
+    {
+        _features.add( listener );
+        return this;
+    }
 
-			return listeners;
-		}
+    public StartupModule bindSystemProperties()
+    {
+        bindSystemProperties = true;
+        return this;
+    }
 
-		@Override
-		protected PackageFilter[] bindPackages() {
-//			return new PackageFilter[] { PackageFilter.create(ConfigurationModule.class, false) };
-			return new PackageFilter[0];
-		}
-	}
+    public StartupModule disableStartupConfiguration()
+    {
+        bindStartupConfiguration = false;
+        return this;
+    }
+
+    public StartupModule bindEnvironment()
+    {
+        bindEnvironment = true;
+        return this;
+    }
+
+    public void verbose()
+    {
+        verbose = true;
+    }
+
+    public static StartupModule create( Class<? extends ClasspathScanner> scanner, PackageFilter... filter )
+    {
+        return new DefaultStartupModule( scanner, filter );
+    }
+
+    public static class DefaultStartupModule
+        extends StartupModule
+    {
+        public DefaultStartupModule( Class<? extends ClasspathScanner> scanner, PackageFilter... filter )
+        {
+            super( scanner, filter );
+        }
+
+        @Override
+        protected Multibinder<ScannerFeature> bindFeatures( Binder binder )
+        {
+            Multibinder<ScannerFeature> listeners = Multibinder.newSetBinder( binder, ScannerFeature.class );
+            listeners.addBinding().to( AutoBindingFeature.class );
+            listeners.addBinding().to( ImplementationBindingFeature.class );
+            listeners.addBinding().to( MultiBindingFeature.class );
+            listeners.addBinding().to( ModuleBindingFeature.class );
+
+            for ( Class<? extends ScannerFeature> listener : _features )
+            {
+                listeners.addBinding().to( listener );
+            }
+
+            return listeners;
+        }
+
+        @Override
+        protected PackageFilter[] bindPackages()
+        {
+            // return new PackageFilter[] { PackageFilter.create(ConfigurationModule.class, false) };
+            return new PackageFilter[0];
+        }
+    }
+
 }
