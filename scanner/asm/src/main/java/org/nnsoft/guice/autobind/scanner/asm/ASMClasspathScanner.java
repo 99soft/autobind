@@ -60,7 +60,7 @@ public class ASMClasspathScanner
     implements ClasspathScanner
 {
 
-    private static String LINE_SEPARATOR = System.getProperty( "line.separator" );
+    private static final String LINE_SEPARATOR = System.getProperty( "line.separator" );
 
     private Logger _logger = Logger.getLogger( ASMClasspathScanner.class.getName() );
 
