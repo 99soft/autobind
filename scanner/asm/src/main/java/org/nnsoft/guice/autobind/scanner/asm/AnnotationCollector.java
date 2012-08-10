@@ -52,9 +52,9 @@ final class AnnotationCollector
 
     private boolean _ignore;
 
-    private Map<String, Annotation> _annotations;
+    private final Map<String, Annotation> _annotations;
 
-    private List<ScannerFeature> _features;
+    private final List<ScannerFeature> _features;
 
     public AnnotationCollector()
     {
@@ -81,10 +81,8 @@ final class AnnotationCollector
     public void destroy()
     {
         _annotations.clear();
-        _annotations = null;
         _class = null;
         _features.clear();
-        _features = null;
     }
 
     @Override
