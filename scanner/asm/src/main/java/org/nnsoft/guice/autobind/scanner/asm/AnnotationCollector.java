@@ -16,6 +16,8 @@ package org.nnsoft.guice.autobind.scanner.asm;
  *    limitations under the License.
  */
 
+import static java.util.logging.Level.WARNING;
+import static java.util.logging.Logger.getLogger;
 import static org.objectweb.asm.ClassReader.SKIP_CODE;
 import static org.objectweb.asm.ClassReader.SKIP_DEBUG;
 import static org.objectweb.asm.ClassReader.SKIP_FRAMES;
@@ -26,7 +28,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
@@ -43,7 +44,7 @@ final class AnnotationCollector
 
     public static final int ASM_FLAGS = SKIP_CODE | SKIP_DEBUG | SKIP_FRAMES;
 
-    private final Logger _logger = Logger.getLogger( AnnotationCollector.class.getName() );
+    private final Logger _logger = getLogger( AnnotationCollector.class.getName() );
 
     private String _name;
 
@@ -116,7 +117,7 @@ final class AnnotationCollector
             }
             catch ( ClassNotFoundException e )
             {
-                _logger.log( Level.WARNING, "Failure while visitAnnotation. Class could not be loaded.", e );
+                _logger.log( WARNING, "Failure while visitAnnotation. Class could not be loaded.", e );
                 return null;
             }
         }
@@ -130,7 +131,7 @@ final class AnnotationCollector
         catch ( ClassNotFoundException e )
         {
             e.printStackTrace();
-            _logger.log( Level.WARNING, "Failure while visitAnnotation. Class could not be loaded.", e );
+            _logger.log( WARNING, "Failure while visitAnnotation. Class could not be loaded.", e );
         }
 
         return null;
