@@ -16,6 +16,10 @@ package org.nnsoft.guice.autobind.scanner.asm;
  *    limitations under the License.
  */
 
+import static org.objectweb.asm.ClassReader.SKIP_CODE;
+import static org.objectweb.asm.ClassReader.SKIP_DEBUG;
+import static org.objectweb.asm.ClassReader.SKIP_FRAMES;
+
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +31,6 @@ import java.util.logging.Logger;
 
 import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
 import org.objectweb.asm.AnnotationVisitor;
-import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -38,7 +41,7 @@ final class AnnotationCollector
     extends ClassVisitor
 {
 
-    public static final int ASM_FLAGS = ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+    public static final int ASM_FLAGS = SKIP_CODE | SKIP_DEBUG | SKIP_FRAMES;
 
     private final Logger _logger = Logger.getLogger( AnnotationCollector.class.getName() );
 
