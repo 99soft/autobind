@@ -44,7 +44,7 @@ final class AnnotationCollector
 
     public static final int ASM_FLAGS = SKIP_CODE | SKIP_DEBUG | SKIP_FRAMES;
 
-    private final Logger _logger = getLogger( AnnotationCollector.class.getName() );
+    private final Logger _logger = getLogger( getClass().getName() );
 
     private String _name;
 
