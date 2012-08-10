@@ -16,7 +16,6 @@ package org.nnsoft.guice.autobind.configuration;
  *    limitations under the License.
  */
 
-
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.nnsoft.guice.autobind.configuration.Configuration.Type.CONFIGURATION;
@@ -31,8 +30,6 @@ import javax.inject.Named;
 /**
  * Use this Annotation to express your need, that a Configuration should be
  * loaded, so it can be bound to an Object.
- *
- * @author Daniel Manzke
  */
 @Documented
 @Retention( RUNTIME )
