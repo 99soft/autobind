@@ -40,7 +40,7 @@ final class AnnotationCollector
 
     public static final int ASM_FLAGS = ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
 
-    private Logger _logger = Logger.getLogger( AnnotationCollector.class.getName() );
+    private final Logger _logger = Logger.getLogger( AnnotationCollector.class.getName() );
 
     private String _name;
 
