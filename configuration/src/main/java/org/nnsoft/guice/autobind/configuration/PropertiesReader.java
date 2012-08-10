@@ -27,7 +27,7 @@ public class PropertiesReader
     implements ConfigurationReader
 {
 
-    private PropertiesURLReader reader;
+    private final PropertiesURLReader reader;
 
     public PropertiesReader( URL url, boolean isXML )
     {
