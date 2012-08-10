@@ -1,19 +1,20 @@
-/**
- * Copyright (C) 2010 Daniel Manzke <daniel.manzke@googlemail.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.nnsoft.guice.autobind.scanner.asm;
+
+/*
+ *    Copyright 2012 The 99 Software Foundation
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -51,13 +52,9 @@ import org.nnsoft.guice.autobind.scanner.PackageFilter;
 import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
 import org.objectweb.asm.ClassReader;
 
-
 /**
  * This Implementation only uses the ASM-API to read all recognized classes. It
  * doesn't depend on any further 3rd-Party libraries.
- * 
- * @author Daniel Manzke
- * 
  */
 public class ASMClasspathScanner implements ClasspathScanner {
 	public static String LINE_SEPARATOR = System.getProperty("line.separator");
@@ -69,7 +66,7 @@ public class ASMClasspathScanner implements ClasspathScanner {
 	private List<Pattern> patterns = new ArrayList<Pattern>();
 	private Set<String> visited;
 	private BlockingQueue<AnnotationCollector> collectors;
-	
+
 	@Inject
 	public ASMClasspathScanner(Set<ScannerFeature> listeners,
 			@Named("packages") PackageFilter... filter) {
@@ -208,7 +205,7 @@ public class ASMClasspathScanner implements ClasspathScanner {
 					} catch (Throwable e) {
 						_logger.log(Level.WARNING, "Skipping Entry " + url
 							+ ", because it couldn't be scanned.",e);
-					} 
+					}
 				}
 			});
 			futures.add(task);
@@ -225,7 +222,7 @@ public class ASMClasspathScanner implements ClasspathScanner {
         pool.shutdown();
         destroy();
 	}
-	
+
 	public void destroy(){
 		classPath = null;
 		collectors.clear();
@@ -298,7 +295,7 @@ public class ASMClasspathScanner implements ClasspathScanner {
 			// ignore
 		}
 	}
-	
+
 	private boolean matches(String name) {
 		boolean returned = false;
 		try{
@@ -307,10 +304,10 @@ public class ASMClasspathScanner implements ClasspathScanner {
 					return (returned = true);
 				}
 			}
-			return returned;	
+			return returned;
 		}finally{
 			if(_logger.isLoggable(Level.FINE)){
-				_logger.log(Level.FINE, ASMClasspathScanner.class.getSimpleName()+".matches(..) - \""+name+"\" -> "+returned);	
+				_logger.log(Level.FINE, ASMClasspathScanner.class.getSimpleName()+".matches(..) - \""+name+"\" -> "+returned);
 			}
 		}
 	}
