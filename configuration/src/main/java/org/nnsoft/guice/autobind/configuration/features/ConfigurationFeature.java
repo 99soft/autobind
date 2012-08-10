@@ -50,7 +50,7 @@ public class ConfigurationFeature
     extends BindingScannerFeature
 {
 
-    Logger _logger = Logger.getLogger( ConfigurationFeature.class.getName() );
+    private final Logger _logger = Logger.getLogger( ConfigurationFeature.class.getName() );
 
     @Inject
     private ConfigurationModule module;
