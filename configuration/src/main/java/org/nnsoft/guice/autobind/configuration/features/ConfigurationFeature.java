@@ -16,6 +16,7 @@ package org.nnsoft.guice.autobind.configuration.features;
  *    limitations under the License.
  */
 
+import static org.nnsoft.guice.autobind.configuration.Configuration.Type.*;
 import static org.nnsoft.guice.autobind.install.BindingStage.*;
 import static java.lang.String.format;
 import static java.util.logging.Level.INFO;
@@ -36,7 +37,6 @@ import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import org.nnsoft.guice.autobind.configuration.Configuration;
-import org.nnsoft.guice.autobind.configuration.Configuration.Type;
 import org.nnsoft.guice.autobind.configuration.ConfigurationBindingJob;
 import org.nnsoft.guice.autobind.configuration.ConfigurationModule;
 import org.nnsoft.guice.autobind.configuration.PathConfig;
@@ -118,7 +118,7 @@ public class ConfigurationFeature
             return;
         }
 
-        if ( Type.VALUES == config.type() || Type.BOTH == config.type() )
+        if ( VALUES == config.type() || BOTH == config.type() )
         {
             BindingJob job = new ConfigurationBindingJob( config.name(), url.toString() );
             if ( !tracer.contains( job ) )
@@ -131,7 +131,7 @@ public class ConfigurationFeature
             }
         }
 
-        if ( Type.CONFIGURATION == config.type() || Type.BOTH == config.type() )
+        if ( CONFIGURATION == config.type() || BOTH == config.type() )
         {
             boolean isXML;
             String path = url.toString();
