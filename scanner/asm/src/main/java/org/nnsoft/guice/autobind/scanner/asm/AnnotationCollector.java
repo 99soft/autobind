@@ -40,17 +40,17 @@ final class AnnotationCollector
 
     public static final int ASM_FLAGS = ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
 
-    protected Logger _logger = Logger.getLogger( AnnotationCollector.class.getName() );
+    private Logger _logger = Logger.getLogger( AnnotationCollector.class.getName() );
 
-    protected String _name;
+    private String _name;
 
-    protected Class<?> _class;
+    private Class<?> _class;
 
-    protected boolean _ignore;
+    private boolean _ignore;
 
-    protected Map<String, Annotation> _annotations;
+    private Map<String, Annotation> _annotations;
 
-    protected List<ScannerFeature> _features;
+    private List<ScannerFeature> _features;
 
     public AnnotationCollector()
     {
