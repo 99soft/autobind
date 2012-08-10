@@ -118,7 +118,7 @@ public class ConfigurationFeature
             return;
         }
 
-        if ( config.type() == Type.VALUES || config.type() == Type.BOTH )
+        if ( Type.VALUES == config.type() || Type.BOTH == config.type() )
         {
             BindingJob job = new ConfigurationBindingJob( config.name(), url.toString() );
             if ( !tracer.contains( job ) )
@@ -131,7 +131,7 @@ public class ConfigurationFeature
             }
         }
 
-        if ( config.type() == Type.CONFIGURATION || config.type() == Type.BOTH )
+        if ( Type.CONFIGURATION == config.type() || Type.BOTH == config.type() )
         {
             boolean isXML;
             String path = url.toString();
