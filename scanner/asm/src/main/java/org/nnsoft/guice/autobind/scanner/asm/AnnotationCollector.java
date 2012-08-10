@@ -34,7 +34,7 @@ import org.objectweb.asm.Opcodes;
 /**
  * Visitor implementation to collect field annotation information from class.
  */
-public class AnnotationCollector
+final class AnnotationCollector
     extends ClassVisitor
 {
 
