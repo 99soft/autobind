@@ -31,6 +31,8 @@
   <name>org.nnsoft.guice.autobind</name>
   <description>Autobind is the automatic Injection/Binding for Google Guice, an extension which add the support for Classpath Scanner
   and auto registration for Guice-Modules and Beans</description>
+  <url>http://99soft.github.com/autobind/</url>
+  <inceptionYear>2010</inceptionYear>
 
   <developers>
     <developer>
