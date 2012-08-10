@@ -16,6 +16,7 @@ package org.nnsoft.guice.autobind.configuration;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
 import static java.util.logging.Level.WARNING;
 import static java.util.logging.Logger.getLogger;
 
@@ -47,12 +48,12 @@ public class PropertiesProvider
     {
         try
         {
-            _logger.info( "Doing lazy Loading for Configuration " + url );
+            _logger.info( format( "Doing lazy Loading for Configuration %s", url ) );
             return new PropertiesReader( url, isXML ).readNative();
         }
         catch ( Exception e )
         {
-            _logger.log( WARNING, "Configuration in " + url + " couldn't be read.", e );
+            _logger.log( WARNING, format( "Configuration in %s couldn't be read.", url), e );
             return new Properties();
         }
     }
