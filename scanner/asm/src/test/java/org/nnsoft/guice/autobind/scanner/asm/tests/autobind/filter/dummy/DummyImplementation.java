@@ -20,19 +20,25 @@ import org.nnsoft.guice.autobind.annotations.Bind;
 import org.nnsoft.guice.autobind.scanner.asm.tests.autobind.filter.PackageFilterTests.SecondTestInterface;
 import org.nnsoft.guice.autobind.scanner.asm.tests.autobind.filter.PackageFilterTests.TestInterface;
 
-
 @Bind
-public class DummyImplementation implements TestInterface, SecondTestInterface {
-	public static final String TEST = "test";
-	public static final String EVENT = "event";
+public class DummyImplementation
+    implements TestInterface, SecondTestInterface
+{
 
-	@Override
-	public String sayHello() {
-		return TEST;
-	}
+    public static final String TEST = "test";
 
-	@Override
-	public String fireEvent() {
-		return EVENT;
-	}
+    public static final String EVENT = "event";
+
+    @Override
+    public String sayHello()
+    {
+        return TEST;
+    }
+
+    @Override
+    public String fireEvent()
+    {
+        return EVENT;
+    }
+
 }

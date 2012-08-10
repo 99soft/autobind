@@ -28,34 +28,41 @@ import org.nnsoft.guice.autobind.scanner.asm.ASMClasspathScanner;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+public class ProviderTest
+{
 
-public class ProviderTest {
-	@Test
-	public void createDynamicModule() {
-		System.setProperty("mode", "ALL");
-		StartupModule startup = StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(ProviderTest.class));
-		startup.bindSystemProperties().disableStartupConfiguration();
-		Injector injector = Guice.createInjector(startup);
-		assertNotNull(injector);
-	}
+    @Test
+    public void createDynamicModule()
+    {
+        System.setProperty( "mode", "ALL" );
+        StartupModule startup =
+            StartupModule.create( ASMClasspathScanner.class, PackageFilter.create( ProviderTest.class ) );
+        startup.bindSystemProperties().disableStartupConfiguration();
+        Injector injector = Guice.createInjector( startup );
+        assertNotNull( injector );
+    }
 
- 	@Test
-	public void createTestInterface() {
- 		System.setProperty("mode", "ALL");
-		StartupModule startup = StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(ProviderTest.class));
-		startup.bindSystemProperties().disableStartupConfiguration();
+    @Test
+    public void createTestInterface()
+    {
+        System.setProperty( "mode", "ALL" );
+        StartupModule startup =
+            StartupModule.create( ASMClasspathScanner.class, PackageFilter.create( ProviderTest.class ) );
+        startup.bindSystemProperties().disableStartupConfiguration();
 
-		Injector injector = Guice.createInjector(startup);
-		assertNotNull(injector);
+        Injector injector = Guice.createInjector( startup );
+        assertNotNull( injector );
 
-		try {
-			Container instance = injector.getInstance(Container.class);
-			assertTrue(instance.get() == Mode.ALL);
-		} catch (Exception e) {
-			// ignore
-			fail(e.getMessage());
-		}
-	}
+        try
+        {
+            Container instance = injector.getInstance( Container.class );
+            assertTrue( instance.get() == Mode.ALL );
+        }
+        catch ( Exception e )
+        {
+            // ignore
+            fail( e.getMessage() );
+        }
+    }
+
 }

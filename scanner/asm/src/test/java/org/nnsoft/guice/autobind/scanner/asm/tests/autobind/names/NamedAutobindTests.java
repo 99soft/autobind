@@ -34,102 +34,120 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 
+public class NamedAutobindTests
+{
 
-public class NamedAutobindTests {
-	@Test
-	public void createDynamicModule() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(NamedAutobindTests.class)));
-		assertNotNull(injector);
-	}
+    @Test
+    public void createDynamicModule()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class,
+                                                        PackageFilter.create( NamedAutobindTests.class ) ) );
+        assertNotNull( injector );
+    }
 
-	@Test
-	public void testWithWrongPackage() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create("java")));
-		assertNotNull(injector);
+    @Test
+    public void testWithWrongPackage()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class, PackageFilter.create( "java" ) ) );
+        assertNotNull( injector );
 
-		TestInterface testInstance;
-		try {
-			testInstance = injector.getInstance(Key.get(TestInterface.class, Names
-				.named("testname")));
-			fail("The Scanner scanned the wrong package, so no Implementation should be bound to this Interface. Instance null? "
-					+ (testInstance == null));
-		} catch (ConfigurationException e) {
-			// ok
-		}
-	}
+        TestInterface testInstance;
+        try
+        {
+            testInstance = injector.getInstance( Key.get( TestInterface.class, Names.named( "testname" ) ) );
+            fail( "The Scanner scanned the wrong package, so no Implementation should be bound to this Interface. Instance null? "
+                + ( testInstance == null ) );
+        }
+        catch ( ConfigurationException e )
+        {
+            // ok
+        }
+    }
 
-	@Test
-	public void createTestInterface() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(NamedAutobindTests.class)));
-		assertNotNull(injector);
+    @Test
+    public void createTestInterface()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class,
+                                                        PackageFilter.create( NamedAutobindTests.class ) ) );
+        assertNotNull( injector );
 
-		TestInterface testInstance = injector.getInstance(Key.get(TestInterface.class, Names
-			.named("testname")));
-		assertNotNull(testInstance);
-		assertTrue(testInstance.sayHello().equals(TestInterfaceImplementation.TEST));
-		assertTrue(testInstance instanceof TestInterfaceImplementation);
-		assertTrue(testInstance instanceof SecondTestInterface);
-	}
+        TestInterface testInstance = injector.getInstance( Key.get( TestInterface.class, Names.named( "testname" ) ) );
+        assertNotNull( testInstance );
+        assertTrue( testInstance.sayHello().equals( TestInterfaceImplementation.TEST ) );
+        assertTrue( testInstance instanceof TestInterfaceImplementation );
+        assertTrue( testInstance instanceof SecondTestInterface );
+    }
 
-	@Test
-	public void createSecondTestInterface() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(NamedAutobindTests.class)));
-		assertNotNull(injector);
+    @Test
+    public void createSecondTestInterface()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class,
+                                                        PackageFilter.create( NamedAutobindTests.class ) ) );
+        assertNotNull( injector );
 
-		SecondTestInterface sameInstance = injector.getInstance(Key.get(SecondTestInterface.class,
-			Names.named("testname")));
-		assertNotNull(sameInstance);
-		assertTrue(sameInstance.fireEvent().equals(TestInterfaceImplementation.EVENT));
-		assertTrue(sameInstance instanceof TestInterfaceImplementation);
-		assertTrue(sameInstance instanceof TestInterface);
-	}
+        SecondTestInterface sameInstance =
+            injector.getInstance( Key.get( SecondTestInterface.class, Names.named( "testname" ) ) );
+        assertNotNull( sameInstance );
+        assertTrue( sameInstance.fireEvent().equals( TestInterfaceImplementation.EVENT ) );
+        assertTrue( sameInstance instanceof TestInterfaceImplementation );
+        assertTrue( sameInstance instanceof TestInterface );
+    }
 
-	@Test
-	public void createAllInterfaces() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(NamedAutobindTests.class)));
-		assertNotNull(injector);
+    @Test
+    public void createAllInterfaces()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class,
+                                                        PackageFilter.create( NamedAutobindTests.class ) ) );
+        assertNotNull( injector );
 
-		TestInterface testInstance = injector.getInstance(Key.get(TestInterface.class, Names
-			.named("testname")));
-		assertNotNull(testInstance);
-		assertTrue(testInstance.sayHello().equals(TestInterfaceImplementation.TEST));
-		assertTrue(testInstance instanceof TestInterfaceImplementation);
-		assertTrue(testInstance instanceof SecondTestInterface);
+        TestInterface testInstance = injector.getInstance( Key.get( TestInterface.class, Names.named( "testname" ) ) );
+        assertNotNull( testInstance );
+        assertTrue( testInstance.sayHello().equals( TestInterfaceImplementation.TEST ) );
+        assertTrue( testInstance instanceof TestInterfaceImplementation );
+        assertTrue( testInstance instanceof SecondTestInterface );
 
-		SecondTestInterface sameInstance = injector.getInstance(Key.get(SecondTestInterface.class,
-			Names.named("testname")));
-		assertNotNull(sameInstance);
-		assertTrue(sameInstance.fireEvent().equals(TestInterfaceImplementation.EVENT));
-		assertTrue(sameInstance instanceof TestInterfaceImplementation);
-		assertTrue(testInstance instanceof TestInterface);
-	}
+        SecondTestInterface sameInstance =
+            injector.getInstance( Key.get( SecondTestInterface.class, Names.named( "testname" ) ) );
+        assertNotNull( sameInstance );
+        assertTrue( sameInstance.fireEvent().equals( TestInterfaceImplementation.EVENT ) );
+        assertTrue( sameInstance instanceof TestInterfaceImplementation );
+        assertTrue( testInstance instanceof TestInterface );
+    }
 
-	public static interface TestInterface {
-		String sayHello();
-	}
+    public static interface TestInterface
+    {
+        String sayHello();
+    }
 
-	public static interface SecondTestInterface {
-		String fireEvent();
-	}
+    public static interface SecondTestInterface
+    {
+        String fireEvent();
+    }
 
-	@Bind(@Named("testname"))
-	public static class TestInterfaceImplementation implements TestInterface, SecondTestInterface {
-		public static final String TEST = "test";
-		public static final String EVENT = "event";
+    @Bind( @Named( "testname" ) )
+    public static class TestInterfaceImplementation
+        implements TestInterface, SecondTestInterface
+    {
+        public static final String TEST = "test";
 
-		@Override
-		public String sayHello() {
-			return TEST;
-		}
+        public static final String EVENT = "event";
 
-		@Override
-		public String fireEvent() {
-			return EVENT;
-		}
-	}
+        @Override
+        public String sayHello()
+        {
+            return TEST;
+        }
+
+        @Override
+        public String fireEvent()
+        {
+            return EVENT;
+        }
+    }
+
 }

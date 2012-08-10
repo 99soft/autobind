@@ -28,10 +28,16 @@ import org.nnsoft.guice.autobind.scanner.asm.tests.autobind.only.ImplementationO
 import org.nnsoft.guice.autobind.scanner.asm.tests.autobind.provider.ProviderTest;
 import org.nnsoft.guice.autobind.scanner.asm.tests.autobind.startconfig.StartConfigProviderTest;
 
-
-@RunWith(Suite.class)
-@Suite.SuiteClasses( { AutobindTests.class, InterfaceAutobindTests.class,
-		DuplicateAutobindTests.class, NamedAutobindTests.class, MultibindTests.class,
-		ImplementationOnlyTests.class, PackageFilterTests.class, StartConfigProviderTest.class, ProviderTest.class })
-public class AllTests {
+@RunWith( Suite.class )
+@Suite.SuiteClasses( { AutobindTests.class,
+                       InterfaceAutobindTests.class,
+                       DuplicateAutobindTests.class,
+                       NamedAutobindTests.class,
+                       MultibindTests.class,
+                       ImplementationOnlyTests.class,
+                       PackageFilterTests.class,
+                       StartConfigProviderTest.class,
+                       ProviderTest.class } )
+public class AllTests
+{
 }

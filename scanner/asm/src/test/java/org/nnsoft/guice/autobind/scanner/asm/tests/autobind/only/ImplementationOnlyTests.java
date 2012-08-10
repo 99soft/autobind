@@ -35,59 +35,75 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 
+public class ImplementationOnlyTests
+{
 
-public class ImplementationOnlyTests {
-	@Test
-	public void createDynamicModule() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(ImplementationOnlyTests.class)));
-		assertNotNull(injector);
-	}
+    @Test
+    public void createDynamicModule()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class,
+                                                        PackageFilter.create( ImplementationOnlyTests.class ) ) );
+        assertNotNull( injector );
+    }
 
-	@Test
-	public void testWithWrongPackage() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create("java")));
-		assertNotNull(injector);
+    @Test
+    public void testWithWrongPackage()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class, PackageFilter.create( "java" ) ) );
+        assertNotNull( injector );
 
-		TestInterfaceImplementation testInstance;
-		try {
-			testInstance = injector.getInstance(Key.get(TestInterfaceImplementation.class, Names
-				.named("testname")));
-			fail("The Scanner scanned the wrong package, so no Implementation should be bound to this Interface. Instance null? "
-					+ (testInstance == null));
-		} catch (ConfigurationException e) {
-			// ok
-		}
-	}
+        TestInterfaceImplementation testInstance;
+        try
+        {
+            testInstance =
+                injector.getInstance( Key.get( TestInterfaceImplementation.class, Names.named( "testname" ) ) );
+            fail( "The Scanner scanned the wrong package, so no Implementation should be bound to this Interface. Instance null? "
+                + ( testInstance == null ) );
+        }
+        catch ( ConfigurationException e )
+        {
+            // ok
+        }
+    }
 
- 	@Test
-	public void createTestInterface() {
-		Injector injector = Guice.createInjector(StartupModule.create(ASMClasspathScanner.class,
-			PackageFilter.create(ImplementationOnlyTests.class)));
-		assertNotNull(injector);
+    @Test
+    public void createTestInterface()
+    {
+        Injector injector =
+            Guice.createInjector( StartupModule.create( ASMClasspathScanner.class,
+                                                        PackageFilter.create( ImplementationOnlyTests.class ) ) );
+        assertNotNull( injector );
 
-		try {
-			TestInterfaceImplementation testInstance = injector.getInstance(Key.get(
-				TestInterfaceImplementation.class, Names.named("testname")));
-			fail("Named Bindings for Implementation only is not supported yet! "
-					+ (testInstance != null));
-		} catch (Exception e) {
-			// ignore
-		}
-	}
+        try
+        {
+            TestInterfaceImplementation testInstance =
+                injector.getInstance( Key.get( TestInterfaceImplementation.class, Names.named( "testname" ) ) );
+            fail( "Named Bindings for Implementation only is not supported yet! " + ( testInstance != null ) );
+        }
+        catch ( Exception e )
+        {
+            // ignore
+        }
+    }
 
-	@Bind(value=@Named("testname"), to=@To(value=Type.IMPLEMENTATION))
-	public static class TestInterfaceImplementation {
-		public static final String TEST = "test";
-		public static final String EVENT = "event";
+    @Bind( value = @Named( "testname" ), to = @To( value = Type.IMPLEMENTATION ) )
+    public static class TestInterfaceImplementation
+    {
+        public static final String TEST = "test";
 
-		public String sayHello() {
-			return TEST;
-		}
+        public static final String EVENT = "event";
 
-		public String fireEvent() {
-			return EVENT;
-		}
-	}
+        public String sayHello()
+        {
+            return TEST;
+        }
+
+        public String fireEvent()
+        {
+            return EVENT;
+        }
+    }
+
 }

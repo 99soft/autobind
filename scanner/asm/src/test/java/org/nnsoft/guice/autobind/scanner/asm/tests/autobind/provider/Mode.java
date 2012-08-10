@@ -16,7 +16,10 @@ package org.nnsoft.guice.autobind.scanner.asm.tests.autobind.provider;
  *    limitations under the License.
  */
 
-public enum Mode {
-	ALL,
-	UNKNOWN
+public enum Mode
+{
+
+    ALL,
+    UNKNOWN;
+
 }

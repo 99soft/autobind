@@ -34,95 +34,120 @@ import org.objectweb.asm.Opcodes;
 /**
  * Visitor implementation to collect field annotation information from class.
  */
-public class AnnotationCollector extends ClassVisitor {
-	public static final int ASM_FLAGS = ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG
-	| ClassReader.SKIP_FRAMES;
-	protected Logger _logger = Logger.getLogger(AnnotationCollector.class.getName());
-	protected String _name;
-	protected Class<?> _class;
-	protected boolean _ignore;
-	protected Map<String, Annotation> _annotations;
+public class AnnotationCollector
+    extends ClassVisitor
+{
 
-	protected List<ScannerFeature> _features;
+    public static final int ASM_FLAGS = ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
 
-	public AnnotationCollector() {
-		super(Opcodes.ASM4);
-		_features = new LinkedList<ScannerFeature>();
-		_annotations = new HashMap<String, Annotation>();
-	}
+    protected Logger _logger = Logger.getLogger( AnnotationCollector.class.getName() );
 
-	public void addScannerFeature(ScannerFeature listener) {
-		_features.add(listener);
-	}
+    protected String _name;
 
-	public void removerScannerFeature(ScannerFeature listener) {
-		_features.remove(listener);
-	}
+    protected Class<?> _class;
 
-	public List<ScannerFeature> getScannerFeatures() {
-		return new ArrayList<ScannerFeature>(_features);
-	}
+    protected boolean _ignore;
 
-	public void destroy(){
-		_annotations.clear();
-		_annotations = null;
-		_class = null;
-		_features.clear();
-		_features = null;
-	}
+    protected Map<String, Annotation> _annotations;
 
-	@Override
-	public void visit(int version, int access, String name, String signature, String superName,
-			String[] interfaces) {
-		_name = name.replace('/', '.');
-		for (String interf : interfaces) {
-			if (interf.equals("java/lang/annotation/Annotation")) {
-				_ignore = true;
-				return;
-			}
-		}
-	}
+    protected List<ScannerFeature> _features;
 
-	@SuppressWarnings("unchecked")
-	public AnnotationVisitor visitAnnotation(String sig, boolean visible) {
-		if (_ignore) {
-			return null;
-		}
-		String annotationClassStr = sig.replace('/', '.').substring(1, sig.length() - 1);
-		if (_class == null) {
-			try {
-				_class = Thread.currentThread().getContextClassLoader().loadClass(_name);
-			} catch (ClassNotFoundException e) {
-				_logger.log(Level.WARNING,
-					"Failure while visitAnnotation. Class could not be loaded.", e);
-				return null;
-			}
-		}
-		try {
-			Class<Annotation> annotationClass = (Class<Annotation>) getClass().getClassLoader()
-				.loadClass(annotationClassStr);
-			Annotation annotation = _class.getAnnotation(annotationClass);
-			_annotations.put(annotationClassStr, annotation);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			_logger.log(Level.WARNING, "Failure while visitAnnotation. Class could not be loaded.",
-				e);
-		}
+    public AnnotationCollector()
+    {
+        super( Opcodes.ASM4 );
+        _features = new LinkedList<ScannerFeature>();
+        _annotations = new HashMap<String, Annotation>();
+    }
 
-		return null;
-	}
+    public void addScannerFeature( ScannerFeature listener )
+    {
+        _features.add( listener );
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void visitEnd() {
-		if (!_ignore && _annotations.size() > 0 && !_annotations.containsKey("javax.enterprise.inject.Alternative")) {
-			for (ScannerFeature listener : _features) {
-				listener.found((Class<Object>) _class, _annotations);
-			}
-		}
-		_name = null;
-		_class = null;
-		_ignore = false;
-		_annotations.clear();
-	}
+    public void removerScannerFeature( ScannerFeature listener )
+    {
+        _features.remove( listener );
+    }
+
+    public List<ScannerFeature> getScannerFeatures()
+    {
+        return new ArrayList<ScannerFeature>( _features );
+    }
+
+    public void destroy()
+    {
+        _annotations.clear();
+        _annotations = null;
+        _class = null;
+        _features.clear();
+        _features = null;
+    }
+
+    @Override
+    public void visit( int version, int access, String name, String signature, String superName, String[] interfaces )
+    {
+        _name = name.replace( '/', '.' );
+        for ( String interf : interfaces )
+        {
+            if ( interf.equals( "java/lang/annotation/Annotation" ) )
+            {
+                _ignore = true;
+                return;
+            }
+        }
+    }
+
+    @SuppressWarnings( "unchecked" )
+    public AnnotationVisitor visitAnnotation( String sig, boolean visible )
+    {
+        if ( _ignore )
+        {
+            return null;
+        }
+        String annotationClassStr = sig.replace( '/', '.' ).substring( 1, sig.length() - 1 );
+        if ( _class == null )
+        {
+            try
+            {
+                _class = Thread.currentThread().getContextClassLoader().loadClass( _name );
+            }
+            catch ( ClassNotFoundException e )
+            {
+                _logger.log( Level.WARNING, "Failure while visitAnnotation. Class could not be loaded.", e );
+                return null;
+            }
+        }
+        try
+        {
+            Class<Annotation> annotationClass =
+                (Class<Annotation>) getClass().getClassLoader().loadClass( annotationClassStr );
+            Annotation annotation = _class.getAnnotation( annotationClass );
+            _annotations.put( annotationClassStr, annotation );
+        }
+        catch ( ClassNotFoundException e )
+        {
+            e.printStackTrace();
+            _logger.log( Level.WARNING, "Failure while visitAnnotation. Class could not be loaded.", e );
+        }
+
+        return null;
+    }
+
+    @SuppressWarnings( "unchecked" )
+    @Override
+    public void visitEnd()
+    {
+        if ( !_ignore && _annotations.size() > 0 && !_annotations.containsKey( "javax.enterprise.inject.Alternative" ) )
+        {
+            for ( ScannerFeature listener : _features )
+            {
+                listener.found( (Class<Object>) _class, _annotations );
+            }
+        }
+        _name = null;
+        _class = null;
+        _ignore = false;
+        _annotations.clear();
+    }
+
 }
