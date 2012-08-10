@@ -16,6 +16,10 @@ package org.nnsoft.guice.autobind.configuration.features;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
+import static java.util.logging.Level.*;
+import static java.util.logging.Logger.getLogger;
+
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
@@ -50,7 +54,7 @@ public class ConfigurationFeature
     extends BindingScannerFeature
 {
 
-    private final Logger _logger = Logger.getLogger( ConfigurationFeature.class.getName() );
+    private final Logger _logger = getLogger( ConfigurationFeature.class.getName() );
 
     @Inject
     private ConfigurationModule module;
@@ -107,8 +111,8 @@ public class ConfigurationFeature
 
         if ( url == null )
         {
-            _logger.log( Level.WARNING, "Ignoring Configuration " + name + " in " + config.location()
-                + ", because is couldn't be found in the Classpath." );
+            _logger.log( WARNING, format( "Ignoring Configuration %s in %s because is couldn't be found in the Classpath.",
+                                          name, config.location() ) );
             // TODO Throw an exception if config doesn't exist?
             return;
         }
@@ -119,7 +123,7 @@ public class ConfigurationFeature
             if ( !tracer.contains( job ) )
             {
                 /* && !(url.toString().startsWith("jar:")) */
-                _logger.log( Level.INFO, "Trying to bind \"" + url.toString() + "\" to rocoto Module." );
+                _logger.log( INFO, format( "Trying to bind \"%s\" to rocoto Module.", url ) );
                 module.addConfigurationReader( new PropertiesURLReader( url, url.toString().endsWith( ".xml" ) ) );
                 // TODO do we need protocol handling? file:/, ...
                 tracer.add( job );
@@ -140,8 +144,8 @@ public class ConfigurationFeature
             }
             else
             {
-                _logger.log( Level.WARNING, "Ignoring Configuration " + name + " in " + path
-                    + ", because is doesn't end with .xml or .properties." );
+                _logger.log( WARNING, format( "Ignoring Configuration %s in %s because it doesn't end with .xml or .properties.",
+                                              name, config.location() ) );
                 // TODO Throw an exception if config has another format?
                 return;
             }
@@ -161,8 +165,8 @@ public class ConfigurationFeature
                 }
                 catch ( Exception e )
                 {
-                    _logger.log( Level.WARNING,
-                                 "Configuration " + name + " in " + url + ", couldn't be loaded: " + e.getMessage(), e );
+                    _logger.log( WARNING, format( "Configuration %s in %s cannot be loaded: %s",
+                                                  name, url, e.getMessage() ), e );
                     return;
                 }
 
@@ -187,8 +191,8 @@ public class ConfigurationFeature
                 File file = new File( path );
                 if ( !file.exists() )
                 {
-                    _logger.log( Level.WARNING, "Ignoring Configuration " + name + " in " + path + ". In the Path "
-                        + file.getAbsolutePath() + " no Configuration was found." );
+                    _logger.log( WARNING, format( "Ignoring Configuration %s in %s, no Configuration found in %s",
+                                                  name, path, file.getAbsolutePath() ) );
                     return null;
                 }
                 if ( file.isFile() )
@@ -199,8 +203,8 @@ public class ConfigurationFeature
                     }
                     catch ( MalformedURLException e )
                     {
-                        _logger.log( Level.WARNING, "Ignoring Configuration " + name + " in " + path
-                            + ". It has an illegal URL-Format.", e );
+                        _logger.log( WARNING, format( "Ignoring Configuration %s in %s due to illegal URL location",
+                                                      name, path ), e );
                         return null;
                     }
                 } /*
@@ -219,8 +223,8 @@ public class ConfigurationFeature
                 }
                 catch ( MalformedURLException e )
                 {
-                    _logger.log( Level.WARNING, "Ignoring Configuration " + name + " in " + path
-                        + ". It has an illegal URL-Format.", e );
+                    _logger.log( WARNING, format( "Ignoring Configuration %s in %s due to illegal URL location",
+                                                  name, path ), e );
                     return null;
                 }
                 break;
