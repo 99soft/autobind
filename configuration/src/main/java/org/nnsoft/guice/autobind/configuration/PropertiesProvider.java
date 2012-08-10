@@ -27,7 +27,7 @@ public class PropertiesProvider
     implements Provider<Properties>
 {
 
-    private final Logger _logger = Logger.getLogger( PropertiesProvider.class.getName() );
+    private final Logger _logger = Logger.getLogger( getClass().getName() );
 
     private URL url;
 
