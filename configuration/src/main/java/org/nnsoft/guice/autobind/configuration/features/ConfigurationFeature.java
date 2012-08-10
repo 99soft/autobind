@@ -16,6 +16,7 @@ package org.nnsoft.guice.autobind.configuration.features;
  *    limitations under the License.
  */
 
+import static org.nnsoft.guice.autobind.install.BindingStage.*;
 import static java.lang.String.format;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.WARNING;
@@ -67,10 +68,10 @@ public class ConfigurationFeature
             Configuration config = (Configuration) annotations.get( Configuration.class.getName() );
             if ( Properties.class.isAssignableFrom( config.to() ) )
             {
-                return BindingStage.BOOT_BEFORE;
+                return BOOT_BEFORE;
             }
         }
-        return BindingStage.IGNORE;
+        return IGNORE;
     }
 
     @Override
