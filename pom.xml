@@ -32,11 +32,6 @@
   <description>Autobind is the automatic Injection/Binding for Google Guice, an extension which add the support for Classpath Scanner
   and auto registration for Guice-Modules and Beans</description>
 
-  <properties>
-    <javac.src.version>1.6</javac.src.version>
-    <javac.target.version>1.6</javac.target.version>
-  </properties>
-
   <developers>
     <developer>
       <id>manzke</id>
@@ -80,6 +75,11 @@
       <url>gitsite:git@github.com/99soft/autobind.git</url>
     </site>
   </distributionManagement>
+
+  <properties>
+    <javac.src.version>1.6</javac.src.version>
+    <javac.target.version>1.6</javac.target.version>
+  </properties>
 
   <dependencies>
     <dependency>
