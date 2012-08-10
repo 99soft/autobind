@@ -33,7 +33,6 @@
   and auto registration for Guice-Modules and Beans</description>
 
   <properties>
-    <project.version>0.9.2-SNAPSHOT</project.version>
     <javac.src.version>1.6</javac.src.version>
     <javac.target.version>1.6</javac.target.version>
   </properties>
