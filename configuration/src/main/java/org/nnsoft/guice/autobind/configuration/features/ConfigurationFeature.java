@@ -17,7 +17,8 @@ package org.nnsoft.guice.autobind.configuration.features;
  */
 
 import static java.lang.String.format;
-import static java.util.logging.Level.*;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Level.WARNING;
 import static java.util.logging.Logger.getLogger;
 
 import java.io.File;
@@ -26,7 +27,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
