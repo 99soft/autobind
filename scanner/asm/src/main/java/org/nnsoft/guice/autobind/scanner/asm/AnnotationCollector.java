@@ -22,6 +22,7 @@ import static java.util.logging.Logger.getLogger;
 import static org.objectweb.asm.ClassReader.SKIP_CODE;
 import static org.objectweb.asm.ClassReader.SKIP_DEBUG;
 import static org.objectweb.asm.ClassReader.SKIP_FRAMES;
+import static org.objectweb.asm.Opcodes.ASM4;
 
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
@@ -33,7 +34,6 @@ import java.util.logging.Logger;
 import org.nnsoft.guice.autobind.scanner.features.ScannerFeature;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
 
 /**
  * Visitor implementation to collect field annotation information from class.
@@ -58,7 +58,7 @@ final class AnnotationCollector
 
     public AnnotationCollector()
     {
-        super( Opcodes.ASM4 );
+        super( ASM4 );
         _features = new LinkedList<ScannerFeature>();
         _annotations = new HashMap<String, Annotation>();
     }
