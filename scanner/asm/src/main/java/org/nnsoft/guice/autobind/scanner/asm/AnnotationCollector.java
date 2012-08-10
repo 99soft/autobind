@@ -17,7 +17,6 @@ package org.nnsoft.guice.autobind.scanner.asm;
  */
 
 import static java.util.Collections.unmodifiableList;
-
 import static java.util.logging.Level.WARNING;
 import static java.util.logging.Logger.getLogger;
 import static org.objectweb.asm.ClassReader.SKIP_CODE;
@@ -25,7 +24,6 @@ import static org.objectweb.asm.ClassReader.SKIP_DEBUG;
 import static org.objectweb.asm.ClassReader.SKIP_FRAMES;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
