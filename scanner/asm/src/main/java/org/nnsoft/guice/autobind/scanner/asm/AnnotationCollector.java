@@ -16,6 +16,8 @@ package org.nnsoft.guice.autobind.scanner.asm;
  *    limitations under the License.
  */
 
+import static java.util.Collections.unmodifiableList;
+
 import static java.util.logging.Level.WARNING;
 import static java.util.logging.Logger.getLogger;
 import static org.objectweb.asm.ClassReader.SKIP_CODE;
@@ -75,7 +77,7 @@ final class AnnotationCollector
 
     public List<ScannerFeature> getScannerFeatures()
     {
-        return new ArrayList<ScannerFeature>( _features );
+        return unmodifiableList( _features );
     }
 
     public void destroy()
