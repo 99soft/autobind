@@ -16,9 +16,11 @@ package org.nnsoft.guice.autobind.configuration;
  *    limitations under the License.
  */
 
+import static java.util.logging.Level.WARNING;
+import static java.util.logging.Logger.getLogger;
+
 import java.net.URL;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Provider;
@@ -27,7 +29,7 @@ public class PropertiesProvider
     implements Provider<Properties>
 {
 
-    private final Logger _logger = Logger.getLogger( getClass().getName() );
+    private final Logger _logger = getLogger( getClass().getName() );
 
     private URL url;
 
@@ -50,7 +52,7 @@ public class PropertiesProvider
         }
         catch ( Exception e )
         {
-            _logger.log( Level.WARNING, "Configuration in " + url + " couldn't be read.", e );
+            _logger.log( WARNING, "Configuration in " + url + " couldn't be read.", e );
             return new Properties();
         }
     }
