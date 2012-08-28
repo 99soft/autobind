@@ -82,7 +82,7 @@ public class ASMClasspathScanner
 
     private List<Pattern> patterns = new ArrayList<Pattern>();
 
-    private Set<String> visited;
+    private final Set<String> visited;
 
     private final BlockingQueue<AnnotationCollector> collectors;
 
@@ -307,7 +307,6 @@ public class ASMClasspathScanner
         patterns.clear();
         patterns = null;
         visited.clear();
-        visited = null;
     }
 
     private void visitFolder( File folder )
