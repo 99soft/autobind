@@ -217,7 +217,10 @@ public class ASMClasspathScanner
                             entry = new File( uri );
                             if ( !entry.exists() )
                             {
-                                _logger.log( FINE, format( "Skipping Entry %s, because it doesn't exists.", entry ) );
+                                if ( _logger.isLoggable( FINE ) )
+                                {
+                                    _logger.log( FINE, format( "Skipping Entry %s, because it doesn't exists.", entry ) );
+                                }
                                 return;
                             }
                         }
@@ -257,11 +260,17 @@ public class ASMClasspathScanner
                     }
                     catch ( FileNotFoundException e )
                     {
-                        _logger.log( FINE, format( "Skipping Entry %s, because it doesn't exists.", url ), e );
+                        if ( _logger.isLoggable( FINE ) )
+                        {
+                            _logger.log( FINE, format( "Skipping Entry %s, because it doesn't exists.", url ), e );
+                        }
                     }
                     catch ( IOException e )
                     {
-                        _logger.log( FINE, format( "Skipping Entry %s, because it couldn't be scanned.", url ),  e );
+                        if ( _logger.isLoggable( FINE ) )
+                        {
+                            _logger.log( FINE, format( "Skipping Entry %s, because it couldn't be scanned.", url ),  e );
+                        }
                     }
                     catch ( Throwable e )
                     {
@@ -303,7 +312,10 @@ public class ASMClasspathScanner
     private void visitFolder( File folder )
         throws IOException
     {
-        _logger.log( FINE, format( "Scanning Folder: %s...", folder.getAbsolutePath() ) );
+        if ( _logger.isLoggable( FINE ) )
+        {
+            _logger.log( FINE, format( "Scanning Folder: %s...", folder.getAbsolutePath() ) );
+        }
 
         File[] files = folder.listFiles();
         for ( File file : files )
