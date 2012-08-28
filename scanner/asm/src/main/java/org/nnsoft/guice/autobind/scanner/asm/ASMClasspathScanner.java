@@ -16,8 +16,11 @@ package org.nnsoft.guice.autobind.scanner.asm;
  *    limitations under the License.
  */
 
+import static java.lang.Runtime.getRuntime;
 import static java.lang.String.format;
+import static java.lang.System.getProperty;
 import static java.util.Collections.synchronizedSet;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.SEVERE;
@@ -45,7 +48,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -69,7 +71,7 @@ public class ASMClasspathScanner
     implements ClasspathScanner
 {
 
-    private static final String LINE_SEPARATOR = System.getProperty( "line.separator" );
+    private static final String LINE_SEPARATOR = getProperty( "line.separator" );
 
     private final Logger _logger = getLogger( getClass().getName() );
 
@@ -86,7 +88,7 @@ public class ASMClasspathScanner
     @Inject
     public ASMClasspathScanner( Set<ScannerFeature> listeners, @Named( "packages" ) PackageFilter... filter )
     {
-        int cores = Runtime.getRuntime().availableProcessors();
+        int cores = getRuntime().availableProcessors();
         this.collectors = new ArrayBlockingQueue<AnnotationCollector>( cores );
 
         for ( int i = 0; i < cores; i++ )
@@ -179,7 +181,7 @@ public class ASMClasspathScanner
     public void scan()
         throws IOException
     {
-        ExecutorService pool = Executors.newFixedThreadPool( Runtime.getRuntime().availableProcessors() );
+        ExecutorService pool = newFixedThreadPool( getRuntime().availableProcessors() );
 
         if ( _logger.isLoggable( INFO ) )
         {
