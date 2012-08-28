@@ -16,14 +16,14 @@ package org.nnsoft.guice.autobind.scanner.asm;
  *    limitations under the License.
  */
 
-import static org.nnsoft.guice.autobind.scanner.asm.AnnotationCollector.ASM_FLAGS;
-
 import static java.lang.String.format;
+import static java.util.Collections.synchronizedSet;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.SEVERE;
 import static java.util.logging.Level.WARNING;
 import static java.util.logging.Logger.getLogger;
+import static org.nnsoft.guice.autobind.scanner.asm.AnnotationCollector.ASM_FLAGS;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -109,7 +109,7 @@ public class ASMClasspathScanner
         {
             addFeature( listener );
         }
-        visited = Collections.synchronizedSet( new HashSet<String>() );
+        visited = synchronizedSet( new HashSet<String>() );
     }
 
     @Override
