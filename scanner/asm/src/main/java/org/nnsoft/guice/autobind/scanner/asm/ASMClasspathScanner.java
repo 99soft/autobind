@@ -16,6 +16,8 @@ package org.nnsoft.guice.autobind.scanner.asm;
  *    limitations under the License.
  */
 
+import static org.nnsoft.guice.autobind.scanner.asm.AnnotationCollector.ASM_FLAGS;
+
 import static java.lang.String.format;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
@@ -378,7 +380,7 @@ public class ASMClasspathScanner
         try
         {
             AnnotationCollector collector = collectors.take();
-            reader.accept( collector, AnnotationCollector.ASM_FLAGS );
+            reader.accept( collector, ASM_FLAGS );
             collectors.put( collector );
         }
         catch ( InterruptedException e )
