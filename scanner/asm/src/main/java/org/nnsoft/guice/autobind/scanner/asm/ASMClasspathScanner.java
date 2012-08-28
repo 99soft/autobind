@@ -71,7 +71,7 @@ public class ASMClasspathScanner
 
     private static final String LINE_SEPARATOR = System.getProperty( "line.separator" );
 
-    private final Logger _logger = getLogger( ASMClasspathScanner.class.getName() );
+    private final Logger _logger = getLogger( getClass().getName() );
 
     @Inject
     @Named( "classpath" )
