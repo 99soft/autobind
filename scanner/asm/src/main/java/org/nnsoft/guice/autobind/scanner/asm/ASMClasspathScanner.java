@@ -16,6 +16,13 @@ package org.nnsoft.guice.autobind.scanner.asm;
  *    limitations under the License.
  */
 
+import static java.lang.String.format;
+import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Level.SEVERE;
+import static java.util.logging.Level.WARNING;
+import static java.util.logging.Logger.getLogger;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -62,7 +69,7 @@ public class ASMClasspathScanner
 
     private static final String LINE_SEPARATOR = System.getProperty( "line.separator" );
 
-    private final Logger _logger = Logger.getLogger( ASMClasspathScanner.class.getName() );
+    private final Logger _logger = getLogger( ASMClasspathScanner.class.getName() );
 
     @Inject
     @Named( "classpath" )
@@ -154,9 +161,9 @@ public class ASMClasspathScanner
             pattern = pattern + "/([A-Z](?:\\w|\\$)+)\\.class$";
         }
 
-        if ( _logger.isLoggable( Level.FINE ) )
+        if ( _logger.isLoggable( FINE ) )
         {
-            _logger.fine( "Including Package for scanning: " + packageName + " generating Pattern: " + pattern );
+            _logger.fine( format( "Including Package for scanning: %s generating Pattern: %s", packageName,  pattern ) );
         }
         patterns.add( Pattern.compile( pattern ) );
     }
@@ -171,7 +178,8 @@ public class ASMClasspathScanner
         throws IOException
     {
         ExecutorService pool = Executors.newFixedThreadPool( Runtime.getRuntime().availableProcessors() );
-        if ( _logger.isLoggable( Level.INFO ) )
+
+        if ( _logger.isLoggable( INFO ) )
         {
             StringBuilder builder = new StringBuilder();
             builder.append( "Using Root-Path for Classpath scanning:" ).append( LINE_SEPARATOR );
@@ -179,8 +187,9 @@ public class ASMClasspathScanner
             {
                 builder.append( url.toString() ).append( LINE_SEPARATOR );
             }
-            _logger.log( Level.INFO, builder.toString() );
+            _logger.log( INFO, builder.toString() );
         }
+
         List<Future<?>> futures = new ArrayList<Future<?>>();
         for ( final URL url : classPath )
         {
@@ -204,20 +213,20 @@ public class ASMClasspathScanner
                             entry = new File( uri );
                             if ( !entry.exists() )
                             {
-                                _logger.log( Level.FINE, "Skipping Entry " + entry + ", because it doesn't exists." );
+                                _logger.log( FINE, format( "Skipping Entry %s, because it doesn't exists.", entry ) );
                                 return;
                             }
                         }
                         catch ( URISyntaxException e )
                         {
                             // ignore
-                            _logger.log( Level.WARNING, "Using invalid URL for Classpath Scanning: " + url, e );
+                            _logger.log( WARNING, format( "Using invalid URL for Classpath Scanning: %s", url ), e );
                             return;
                         }
                         catch ( Throwable e )
                         {
                             // ignore
-                            _logger.log( Level.SEVERE, "Using invalid URL for Classpath Scanning: " + url, e );
+                            _logger.log( SEVERE, format( "Using invalid URL for Classpath Scanning: ", url ), e );
                             return;
                         }
 
@@ -244,15 +253,15 @@ public class ASMClasspathScanner
                     }
                     catch ( FileNotFoundException e )
                     {
-                        _logger.log( Level.FINE, "Skipping Entry " + url + ", because it doesn't exists.", e );
+                        _logger.log( FINE, format( "Skipping Entry %s, because it doesn't exists.", url ), e );
                     }
                     catch ( IOException e )
                     {
-                        _logger.log( Level.FINE, "Skipping Entry " + url + ", because it couldn't be scanned.", e );
+                        _logger.log( FINE, format( "Skipping Entry %s, because it couldn't be scanned.", url ),  e );
                     }
                     catch ( Throwable e )
                     {
-                        _logger.log( Level.WARNING, "Skipping Entry " + url + ", because it couldn't be scanned.", e );
+                        _logger.log( WARNING, format( "Skipping Entry %s, because it couldn't be scanned.", url ),  e );
                     }
                 }
             } );
@@ -270,7 +279,7 @@ public class ASMClasspathScanner
             }
             catch ( ExecutionException e )
             {
-                _logger.log( Level.SEVERE, e.getMessage(), e );
+                _logger.log( SEVERE, e.getMessage(), e );
             }
         }
         pool.shutdown();
@@ -290,7 +299,8 @@ public class ASMClasspathScanner
     private void visitFolder( File folder )
         throws IOException
     {
-        _logger.log( Level.FINE, "Scanning Folder: " + folder.getAbsolutePath() );
+        _logger.log( FINE, format( "Scanning Folder: %s...", folder.getAbsolutePath() ) );
+
         File[] files = folder.listFiles();
         for ( File file : files )
         {
@@ -320,9 +330,9 @@ public class ASMClasspathScanner
     private void visitJar( URL url )
         throws IOException
     {
-        if ( _logger.isLoggable( Level.FINE ) )
+        if ( _logger.isLoggable( FINE ) )
         {
-            _logger.log( Level.FINE, "Scanning JAR-File: " + url );
+            _logger.log( FINE, format( "Scanning JAR-File: %s", url ) );
         }
 
         JarURLConnection conn = (JarURLConnection) url.openConnection();
@@ -332,10 +342,11 @@ public class ASMClasspathScanner
     private void visitJar( File file )
         throws IOException
     {
-        if ( _logger.isLoggable( Level.FINE ) )
+        if ( _logger.isLoggable( FINE ) )
         {
-            _logger.log( Level.FINE, "Scanning JAR-File: " + file.getAbsolutePath() );
+            _logger.log( FINE, format( "Scanning JAR-File: %s", file.getAbsolutePath() ) );
         }
+
         JarFile jarFile = new JarFile( file );
         _visitJar( jarFile );
     }
@@ -394,8 +405,8 @@ public class ASMClasspathScanner
         {
             if ( _logger.isLoggable( Level.FINE ) )
             {
-                _logger.log( Level.FINE, ASMClasspathScanner.class.getSimpleName() + ".matches(..) - \"" + name
-                    + "\" -> " + returned );
+                _logger.log( FINE, format( "%s.matches(..) - \"%s\" -> %s",
+                                           getClass().getSimpleName(), name, returned ) );
             }
         }
     }
