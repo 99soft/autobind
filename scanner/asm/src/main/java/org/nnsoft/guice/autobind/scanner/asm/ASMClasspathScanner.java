@@ -72,7 +72,7 @@ public class ASMClasspathScanner
 
     private Set<String> visited;
 
-    private BlockingQueue<AnnotationCollector> collectors;
+    private final BlockingQueue<AnnotationCollector> collectors;
 
     @Inject
     public ASMClasspathScanner( Set<ScannerFeature> listeners, @Named( "packages" ) PackageFilter... filter )
@@ -281,7 +281,6 @@ public class ASMClasspathScanner
     {
         classPath = null;
         collectors.clear();
-        collectors = null;
         patterns.clear();
         patterns = null;
         visited.clear();
