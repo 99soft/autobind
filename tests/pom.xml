@@ -47,17 +47,6 @@
         </includes>
       </resource>
     </resources>
-  </build --><!-- build>
-    <resources>
-      <resource>
-        <directory>${basedir}/../</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>LICENSE</include>
-          <include>NOTICE</include>
-        </includes>
-      </resource>
-    </resources>
   </build>
 
 </project>
