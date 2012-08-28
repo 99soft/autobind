@@ -26,6 +26,7 @@ import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.SEVERE;
 import static java.util.logging.Level.WARNING;
 import static java.util.logging.Logger.getLogger;
+import static java.util.regex.Pattern.compile;
 import static org.nnsoft.guice.autobind.scanner.asm.AnnotationCollector.ASM_FLAGS;
 
 import java.io.BufferedInputStream;
@@ -169,7 +170,7 @@ public class ASMClasspathScanner
         {
             _logger.fine( format( "Including Package for scanning: %s generating Pattern: %s", packageName,  pattern ) );
         }
-        patterns.add( Pattern.compile( pattern ) );
+        patterns.add( compile( pattern ) );
     }
 
     @Override
