@@ -390,7 +390,10 @@ public class ASMClasspathScanner
     private void visitClass( InputStream in )
         throws IOException
     {
-        ClassReader reader = new ClassReader( new BufferedInputStream( in ) );
+    	InputStream bufIn = new BufferedInputStream( in );
+    	try
+    	{
+        ClassReader reader = new ClassReader( bufIn );
         try
         {
             AnnotationCollector collector = collectors.take();
@@ -401,6 +404,10 @@ public class ASMClasspathScanner
         {
             // ignore
         }
+    	}finally
+    	{
+    		bufIn.close();
+    	}
     }
 
     private boolean matches( String name )
