@@ -25,7 +25,8 @@ import static org.nnsoft.guice.autobind.install.BindingStage.IGNORE;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.logging.Logger;
-
+import com.google.inject.Injector;
+import com.google.inject.Guice;
 import javax.inject.Singleton;
 
 import org.nnsoft.guice.autobind.annotations.GuiceModule;
@@ -68,6 +69,7 @@ public class ModuleBindingFeature
             {
                 _binder.install( (Module) injector.getInstance( annotatedClass ) );
             }
+            tracer.add(job);
         }
         else
         {
